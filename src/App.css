@@ -1,32 +1,85 @@
-.App {
-  text-align: center;
+.layout {
+  height: 100vh;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.ant-layout-content {
+  min-height: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.search {
+  margin: 0 auto;
+  padding: 10px;
+  max-width: 90%;
+}
+
+.login-form-page {
+  height: 50vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.login-form-page form {
+  max-width: 400px;
+  margin: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.registration-form-page form {
+  max-width: 600px;
+  margin: auto;
+}
+
+.actions-panel {
+  margin-bottom: 30px;
+}
+
+.actions-panel button {
+  margin-right: 20px;
+}
+
+.annoucement-list {
+  display: flex;
+}
+
+.annoucement-list .ant-card-bordered {
+  margin: 0 10px;
+}
+
+.details-page {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.details-page h1 {
+  order: 0;
+  width: 100%
+}
+
+.details-page .description-section {
+  order: 1;
+  width: 60%;
+  text-align: justify;
+}
+
+.details-page .details-buttons-section {
+  order: 2;
+  width: 40%;
+}
+
+.details-page .details-buttons-section button {
+  display: block;
+  margin: 20px auto;
+  width: 220px;
+  height: 40px;
+}
+
+.ant-spin.ant-spin-spinning {
+  z-index: 2;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.layout.loading.ant-layout.ant-layout-has-sider {
+  z-index: 0;
+  opacity: 0.25;
 }
