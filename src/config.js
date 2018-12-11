@@ -1,7 +1,8 @@
 export const config = {
   api: {
-    url: 'http://elastic-app-kk-test.azurewebsites.net',
-    base: '/api',
-    announcements: '/announcements'
+    baseUrl: 'http://elastic-app-kk-test.azurewebsites.net/api',
+    announcements: '/announcements',
+    announcementDetails: '/announcements/{0}',
+    categories: '/categories'
   }
 }

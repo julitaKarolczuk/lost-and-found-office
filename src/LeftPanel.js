@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { Layout, Menu, Icon } from 'antd'
-import MenuItem from 'antd/lib/menu/MenuItem';
+import PropTypes from 'prop-types'
+import { Layout, Menu } from 'antd'
+import MenuItem from 'antd/lib/menu/MenuItem'
+import { connect } from 'react-redux'
+import { getCategories } from './actions'
 
 const { Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -8,12 +11,29 @@ const SubMenu = Menu.SubMenu
 class LeftPanel extends Component {
   constructor () {
     super()
+
     this.state = {
       collapsed: false
     }
   }
 
+  componentDidMount () {
+    this.props.getCategories()
+  }
+
+  renderCategory ({id, name}) {
+    return (
+      <MenuItem key={id}>
+        {name}
+      </MenuItem>
+    )
+  }
+
   render () {
+    const {
+      categories = []
+    } = this.props
+
     return (
       <Sider
         trigger={null}
@@ -22,25 +42,7 @@ class LeftPanel extends Component {
       >
         <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
           <SubMenu title='Kategoria'>
-            <SubMenu title='Odzież'>
-              <MenuItem>Czapki</MenuItem>
-              <MenuItem>Buty</MenuItem>
-              <MenuItem>Szaliki</MenuItem>
-            </SubMenu>
-            <SubMenu title='Akcesoria'>
-              <MenuItem>Biżuteria</MenuItem>
-              <MenuItem>Okulary</MenuItem>
-              <MenuItem>Zegarki</MenuItem>
-            </SubMenu>
-            <SubMenu title='Dokumenty'>
-              <MenuItem>Dowody</MenuItem>
-              <MenuItem>Prawa Jazdy</MenuItem>
-              <MenuItem>Karty bankowe</MenuItem>
-            </SubMenu>
-            <SubMenu title='Urządzenia'>
-              <MenuItem>Telefony</MenuItem>
-              <MenuItem>Pendrive'y</MenuItem>
-            </SubMenu>
+            {categories.map(this.renderCategory)}
           </SubMenu>
           <MenuItem>Zgłoszone</MenuItem>
           <MenuItem>Magazyn</MenuItem>
@@ -51,4 +53,13 @@ class LeftPanel extends Component {
   }
 }
 
-export default LeftPanel
+const mapStateToProps = state => ({
+  categories: state.app.categories
+})
+
+LeftPanel.propTypes = {
+  getCategories: PropTypes.func,
+  categories: PropTypes.array
+}
+
+export default connect(mapStateToProps, { getCategories })(LeftPanel)

@@ -6,14 +6,17 @@ import { notification } from 'antd'
 // ENDPOINTS
 const {
   api: {
-    url,
-    base,
-    announcements
+    baseUrl,
+    announcements,
+    announcementDetails,
+    categories
   }
 } = config
 
-const announcementsUrl = `${url}${base}${announcements}`
-const announcementDetailsUrl = `${announcementsUrl}/{0}`
+const announcementsUrl = `${baseUrl}${announcements}`
+const announcementDetailsUrl = `${baseUrl}${announcementDetails}`
+const categoriesUrl = `${baseUrl}${categories}`
+
 // NOTIFICATIONS
 
 export const openNotificationWithIcon = (type) => {
@@ -115,6 +118,24 @@ export const removeItem = id => {
     })
 }
 
+const editItemAction = data => ({
+  type: actionsTypes.EDIT_ITEM,
+  payload: data
+})
+
+export const editItem = data => dispatch => {
+  dispatch(showLoaderAction())
+  return axios.put(announcementDetailsUrl.replace('{0}', data.id), data)
+    .then(() => {
+      dispatch(editItemAction(data))
+      dispatch(hideLoaderAction())
+    })
+    .catch(error => {
+      console.dir(error)
+      dispatch(hideLoaderAction())
+    })
+}
+
 const addItemAction = data => ({
   type: actionsTypes.ADD_ITEM,
   payload: data
@@ -129,6 +150,21 @@ export const addItem = data => dispatch => {
     })
     .catch(error => {
       console.dir(error)
+      dispatch(hideLoaderAction())
+    })
+}
+
+// CATEGORIES ACTIONS
+const getCategoriesAction = data => ({
+  type: actionsTypes.GET_CATEGORIES,
+  payload: data
+})
+
+export const getCategories = () => dispatch => {
+  dispatch(showLoaderAction())
+  return fetchData(categoriesUrl)
+    .then(data => {
+      dispatch(getCategoriesAction(data))
       dispatch(hideLoaderAction())
     })
 }

@@ -32,6 +32,21 @@ export default (state = defaultState, action) => {
         ...state,
         announcements: [...state.announcements, payload]
       }
+    case actions.EDIT_ITEM:
+      return {
+        ...state,
+        announcements: state.announcements.map(item => {
+          if (item.id === payload.id) {
+            return payload
+          }
+          return item
+        })
+      }
+    case actions.GET_CATEGORIES:
+      return {
+        ...state,
+        categories: payload
+      }
     default:
       return state
   }
