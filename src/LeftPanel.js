@@ -4,9 +4,18 @@ import { Layout, Menu } from 'antd'
 import MenuItem from 'antd/lib/menu/MenuItem'
 import { connect } from 'react-redux'
 import { getCategories } from './actions'
+import { NavLink } from 'react-router-dom'
+import { messages } from './messages'
+import { config } from './config'
+import qs from 'query-string'
 
 const { Sider } = Layout
 const SubMenu = Menu.SubMenu
+
+const {
+  app: appUrl,
+  itemsStore
+} = config.url
 
 class LeftPanel extends Component {
   constructor () {
@@ -24,7 +33,14 @@ class LeftPanel extends Component {
   renderCategory ({id, name}) {
     return (
       <MenuItem key={id}>
-        {name}
+        <NavLink to={{
+          pathname: appUrl,
+          search: qs.stringify({
+            id
+          })
+        }}>
+          {name}
+        </NavLink>
       </MenuItem>
     )
   }
@@ -41,12 +57,33 @@ class LeftPanel extends Component {
         collapsed={this.state.collapsed}
       >
         <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
-          <SubMenu title='Kategoria'>
+          <SubMenu title={messages.leftPanel.category}>
             {categories.map(this.renderCategory)}
           </SubMenu>
-          <MenuItem>Zgłoszone</MenuItem>
-          <MenuItem>Magazyn</MenuItem>
-          <MenuItem>Archiwum</MenuItem>
+          <MenuItem>
+            <NavLink to={{
+              pathname: appUrl,
+              search: qs.stringify({
+                name: 'lost'
+              })
+            }}>
+              {messages.leftPanel.lost}
+            </NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink to={{
+              pathname: itemsStore
+            }}>
+              {messages.leftPanel.store}
+            </NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink to={{
+              pathname: appUrl
+            }}>
+              {messages.leftPanel.records}
+            </NavLink>
+          </MenuItem>
         </Menu>
       </Sider>
     )

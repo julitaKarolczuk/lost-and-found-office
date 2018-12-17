@@ -45,5 +45,11 @@ export const messages = {
     remove: 'Usuń',
     createPdf: 'Wygeneruj dokument odbioru',
     response: 'Odpowiedż na zgłoszenie'
+  },
+  leftPanel: {
+    lost: 'Zgłoszone',
+    store: 'Magazyn',
+    records: 'Archiwum',
+    category: 'Kategoria'
   }
 }
