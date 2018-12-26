@@ -6,8 +6,16 @@ import {
   Checkbox,
   Button
 } from 'antd'
+import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
+import { signUp } from './actions'
+import { config } from './config'
 
 const FormItem = Form.Item
+
+const {
+  login
+} = config.url
 
 class RegistrationForm extends React.Component {
   constructor () {
@@ -16,6 +24,7 @@ class RegistrationForm extends React.Component {
     this.state = {
       confirmDirty: false
     }
+
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleConfirmBlur = this.handleConfirmBlur.bind(this)
     this.compareToFirstPassword = this.compareToFirstPassword.bind(this)
@@ -26,6 +35,8 @@ class RegistrationForm extends React.Component {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        this.props.signUp(values)
+          .then(() => this.props.history.push(login))
         console.log('Received values of form: ', values)
       }
     })
@@ -87,7 +98,7 @@ class RegistrationForm extends React.Component {
             {...formItemLayout}
             label='Imię'
           >
-            {getFieldDecorator('first_name', {
+            {getFieldDecorator('firstName', {
               rules: [{ required: true, message: 'Wprowadź swoje imię!', whitespace: true }]
             })(
               <Input />
@@ -97,8 +108,28 @@ class RegistrationForm extends React.Component {
             {...formItemLayout}
             label='Nazwisko'
           >
-            {getFieldDecorator('last_name', {
+            {getFieldDecorator('lastName', {
               rules: [{ required: true, message: 'Wprowadź swoje nazwisko!', whitespace: true }]
+            })(
+              <Input />
+            )}
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label='Login'
+          >
+            {getFieldDecorator('userName', {
+              rules: [{ required: true, message: 'Wprowadź swój login!', whitespace: false }]
+            })(
+              <Input />
+            )}
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label='Telefon'
+          >
+            {getFieldDecorator('phoneNumber', {
+              rules: [{ required: true, message: 'Wprowadź swój numer telefonu!', whitespace: false }]
             })(
               <Input />
             )}
@@ -162,7 +193,9 @@ class RegistrationForm extends React.Component {
 }
 
 RegistrationForm.propTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
+  history: PropTypes.object,
+  sighUp: PropTypes.func
 }
 
-export default Form.create()(RegistrationForm)
+export default withRouter(Form.create()(connect(null, { signUp })(RegistrationForm)))

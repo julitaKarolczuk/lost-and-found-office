@@ -42,9 +42,8 @@ class AnnouncementDetails extends Component {
       removeItem
     } = this.props
 
-    // removeItem(id)
-    // this.props.history.goBack()
-    openNotificationWithIcon('success')
+    removeItem(id)
+    this.props.history.goBack()
   }
 
   render () {

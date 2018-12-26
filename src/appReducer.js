@@ -1,7 +1,8 @@
 import * as actions from './actionsTypes'
 
 const defaultState = {
-  loading: false
+  loading: false,
+  signIn: false
 }
 
 export default (state = defaultState, action) => {
@@ -46,6 +47,21 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         categories: payload
+      }
+    case actions.USER_SIGN_IN:
+      return {
+        ...state,
+        signIn: true
+      }
+    case actions.USER_SIGN_OUT:
+      return {
+        ...state,
+        signIn: false
+      }
+    case actions.GET_USER_DATA:
+      return {
+        ...state,
+        user: payload
       }
     default:
       return state

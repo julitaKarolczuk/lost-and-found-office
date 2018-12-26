@@ -3,7 +3,9 @@ export const config = {
     baseUrl: 'http://elastic-app-kk-test.azurewebsites.net/api',
     announcements: '/announcements',
     announcementDetails: '/announcements/{0}',
-    categories: '/categories'
+    categories: '/categories',
+    authentication: '/users/authenticate',
+    registration: '/users/register'
   },
   url: {
     app: '/app',
@@ -11,6 +13,7 @@ export const config = {
     login: '/login',
     itemDetails: '/announcement-details/:id',
     records: '/records',
-    itemsStore: '/items-store'
+    itemsStore: '/items-store',
+    profile: '/profile'
   }
 }

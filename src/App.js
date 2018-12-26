@@ -2,18 +2,46 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import 'antd/dist/antd.css'
 import './App.css'
-import { Layout, Input, Spin } from 'antd'
+import {
+  Layout,
+  Input,
+  Spin,
+  Button
+} from 'antd'
 import LeftPanel from './LeftPanel'
 import ModalRoot from './ModalRoot'
 import { connect } from 'react-redux'
 import { messages } from './messages'
+import AvatarOptions from './AvatarOptions'
 
-const { Header, Content, Footer } = Layout
+const {
+  Header,
+  Content,
+  Footer
+} = Layout
+
 const Search = Input.Search
 
 class App extends Component {
+  constructor () {
+    super()
+
+    this.state = {
+      isAvatarClicked: false
+    }
+
+    this.toogleAvatarOptions = this.toogleAvatarOptions.bind(this)
+  }
+
+  toogleAvatarOptions () {
+    this.setState(prevState => ({ isAvatarClicked: !prevState.isAvatarClicked }))
+  }
+
   render () {
-    const { loading } = this.props
+    const {
+      loading,
+      isSignedIn
+    } = this.props
 
     return (
       <Fragment>
@@ -21,14 +49,31 @@ class App extends Component {
           <LeftPanel />
           <Layout>
             <Header style={{ background: '#fff', padding: 0 }}>
-              <Search
-                placeholder={messages.search.placeholder}
-                enterButton={messages.search.button}
-                size='large'
-                onSearch={value => console.log(value)}
-                className='search'
-              />
-              {/* <h1>BIURO RZECZY ZNALEZIONYCH</h1> */}
+              {isSignedIn
+              ? (
+                <div className='app-header'>
+                  <Search
+                    placeholder={messages.search.placeholder}
+                    enterButton={messages.search.button}
+                    size='large'
+                    onSearch={value => console.log(value)}
+                    className='search'
+                  />
+                  <div className='avatar'>
+                    <Button
+                      size='large'
+                      icon='user'
+                      className='avatar-button'
+                      onClick={this.toogleAvatarOptions}
+                    />
+                    {this.state.isAvatarClicked &&
+                      <AvatarOptions closeOptions={this.toogleAvatarOptions} />
+                    }
+                  </div>
+                </div>
+              ) : (
+                <h1>BIURO RZECZY ZNALEZIONYCH</h1>
+              )}
             </Header>
             <Content style={{ margin: '24px 16px', padding: 24, background: '#fff'}}>
               {this.props.children}
@@ -45,11 +90,13 @@ class App extends Component {
 
 App.propTypes = {
   children: PropTypes.array,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  isSignedIn: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
-  loading: state.app.loading
+  loading: state.app.loading,
+  isSignedIn: state.app.signIn
 })
 
 export default connect(mapStateToProps, {})(App)

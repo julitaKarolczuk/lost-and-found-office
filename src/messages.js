@@ -5,12 +5,12 @@ export const messages = {
   },
   loginPage: {
     rules: {
-      email: 'Podaj email!',
+      email: 'Podaj login!',
       password: 'Podaj hasło!'
 
     },
     placeholder: {
-      email: 'Email',
+      email: 'Login',
       password: 'Password'
     },
     forgotPassword: 'Nie pamiętam hasła',
@@ -51,5 +51,16 @@ export const messages = {
     store: 'Magazyn',
     records: 'Archiwum',
     category: 'Kategoria'
+  },
+  avatarOptions: {
+    logout: 'Wyloguj',
+    profile: 'Profil'
+  },
+  notifications: {
+    success: 'success',
+    error: 'error',
+    signInTitle: 'Logowanie',
+    signInSuccess: 'Pomyślnie zalogowano',
+    signInError: 'Logowanie nie powiodło się'
   }
 }

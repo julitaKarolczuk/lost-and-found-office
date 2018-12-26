@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Layout, Menu } from 'antd'
 import MenuItem from 'antd/lib/menu/MenuItem'
 import { connect } from 'react-redux'
-import { getCategories } from './actions'
 import { NavLink } from 'react-router-dom'
 import { messages } from './messages'
 import { config } from './config'
@@ -26,10 +25,6 @@ class LeftPanel extends Component {
     }
   }
 
-  componentDidMount () {
-    this.props.getCategories()
-  }
-
   renderCategory ({id, name}) {
     return (
       <MenuItem key={id}>
@@ -47,7 +42,8 @@ class LeftPanel extends Component {
 
   render () {
     const {
-      categories = []
+      categories = [],
+      isSignedIn
     } = this.props
 
     return (
@@ -56,47 +52,50 @@ class LeftPanel extends Component {
         collapsible
         collapsed={this.state.collapsed}
       >
-        <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
-          <SubMenu title={messages.leftPanel.category}>
-            {categories.map(this.renderCategory)}
-          </SubMenu>
-          <MenuItem>
-            <NavLink to={{
-              pathname: appUrl,
-              search: qs.stringify({
-                name: 'lost'
-              })
-            }}>
-              {messages.leftPanel.lost}
-            </NavLink>
-          </MenuItem>
-          <MenuItem>
-            <NavLink to={{
-              pathname: itemsStore
-            }}>
-              {messages.leftPanel.store}
-            </NavLink>
-          </MenuItem>
-          <MenuItem>
-            <NavLink to={{
-              pathname: appUrl
-            }}>
-              {messages.leftPanel.records}
-            </NavLink>
-          </MenuItem>
-        </Menu>
+        {isSignedIn && (
+          <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
+            <SubMenu title={messages.leftPanel.category}>
+              {categories.map(this.renderCategory)}
+            </SubMenu>
+            <MenuItem>
+              <NavLink to={{
+                pathname: appUrl,
+                search: qs.stringify({
+                  name: 'lost'
+                })
+              }}>
+                {messages.leftPanel.lost}
+              </NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to={{
+                pathname: itemsStore
+              }}>
+                {messages.leftPanel.store}
+              </NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to={{
+                pathname: appUrl
+              }}>
+                {messages.leftPanel.records}
+              </NavLink>
+            </MenuItem>
+          </Menu>
+        )}
       </Sider>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  categories: state.app.categories
+  categories: state.app.categories,
+  isSignedIn: state.app.signIn
 })
 
 LeftPanel.propTypes = {
-  getCategories: PropTypes.func,
-  categories: PropTypes.array
+  categories: PropTypes.array,
+  isSignedIn: PropTypes.bool
 }
 
-export default connect(mapStateToProps, { getCategories })(LeftPanel)
+export default connect(mapStateToProps, {})(LeftPanel)

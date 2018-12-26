@@ -9,7 +9,7 @@
 .search {
   margin: 0 auto;
   padding: 10px;
-  max-width: 90%;
+  max-width: 85%;
 }
 
 .login-form-page {
@@ -82,4 +82,38 @@
 .layout.loading.ant-layout.ant-layout-has-sider {
   z-index: 0;
   opacity: 0.25;
+}
+
+.app-header {
+  position: relative;
+}
+
+.app-header .avatar {
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  text-align: center;
+  width: 100px;
+}
+
+.app-header .avatar .avatar-button {
+ border-radius: 50%;
+ width: 40px;
+}
+
+.app-header .avatar .options {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100px;
+  border: solid 1px lightgray;
+  padding: 4px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 3px 14px 0px #888888;
+}
+
+.app-header .avatar .options button {
+  width: 80px;
+  margin: auto;
+  border: none;
 }

@@ -13,3 +13,7 @@ export const ADD_ITEM = 'ADD_ITEM'
 export const EDIT_ITEM = 'EDIT_ITEM'
 
 export const GET_CATEGORIES = 'GET_CATEGORIES'
+
+export const USER_SIGN_IN = 'USER_SIGN_IN'
+export const USER_SIGN_OUT = 'USER_SIGN_OUT'
+export const GET_USER_DATA = 'GET_USER_DATA'

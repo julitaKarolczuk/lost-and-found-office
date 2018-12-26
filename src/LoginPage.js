@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { showForgotPasswordModal } from './actions'
+import {
+  showForgotPasswordModal,
+  signIn
+} from './actions'
 import { messages } from './messages'
 import {
   Form,
@@ -11,8 +14,14 @@ import {
   Button,
   Checkbox
 } from 'antd'
+import { withRouter } from 'react-router'
+import { config } from './config'
 
 const { Item: FormItem } = Form
+
+const {
+  app
+} = config.url
 
 class LoginPage extends Component {
   constructor () {
@@ -26,6 +35,8 @@ class LoginPage extends Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        this.props.signIn(values)
+          .then(() => this.props.history.push(app))
         console.log('Received values of form: ', values)
       }
     })
@@ -47,7 +58,7 @@ class LoginPage extends Component {
           className='login-form'
         >
           <FormItem>
-            {getFieldDecorator('email', {
+            {getFieldDecorator('login', {
               rules: [{
                 required: true,
                 message: messages.loginPage.rules.email
@@ -127,7 +138,12 @@ class LoginPage extends Component {
 LoginPage.propTypes = {
   getFieldDecorator: PropTypes.func,
   form: PropTypes.object,
-  showForgotPasswordModal: PropTypes.func
+  showForgotPasswordModal: PropTypes.func,
+  signIn: PropTypes.func,
+  history: PropTypes.object
 }
 
-export default Form.create()(connect(null, { showForgotPasswordModal })(LoginPage))
+export default withRouter(Form.create()(connect(null, {
+  showForgotPasswordModal,
+  signIn
+})(LoginPage)))
