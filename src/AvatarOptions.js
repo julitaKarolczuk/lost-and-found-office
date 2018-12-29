@@ -9,7 +9,7 @@ import { signOut } from './actions'
 
 const {
   profile,
-  login
+  app
 } = config.url
 
 const AvatarOptions = ({ history, signOut, closeOptions }) => {
@@ -21,7 +21,7 @@ const AvatarOptions = ({ history, signOut, closeOptions }) => {
   const logout = () => {
     signOut()
     closeOptions()
-    history.push(login)
+    history.push(app)
   }
 
   return (

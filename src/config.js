@@ -12,6 +12,7 @@ export const config = {
     registration: '/registration',
     login: '/login',
     itemDetails: '/announcement-details/:id',
+    itemDetailsUrl: '/announcement-details/',
     records: '/records',
     itemsStore: '/items-store',
     profile: '/profile'

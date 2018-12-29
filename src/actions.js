@@ -2,7 +2,7 @@ import * as actionsTypes from './actionsTypes'
 import axios from 'axios'
 import { config } from './config'
 import { notification } from 'antd'
-import { messages } from './messages';
+import { messages } from './messages'
 
 // ENDPOINTS
 const {
@@ -186,7 +186,7 @@ const authorization = ({ login, password }) => {
   .then(response => response.data)
 }
 
-const authorizationAction = () => ({
+export const authorizationAction = () => ({
   type: actionsTypes.USER_SIGN_IN
 })
 
@@ -209,14 +209,13 @@ export const signIn = values => dispatch => {
 
       dispatch(authorizationAction())
       dispatch(getUserDataAction(user))
-      dispatch(getCategories())
       dispatch(hideLoaderAction())
-      openNotificationWithIcon(messages.notifications.success, messages.notifications.signInTitle, messages.notifications.signInSuccess)
+      openNotificationWithIcon(messages.notifications.success, messages.notifications.signInTitle)
     })
     .catch((err) => {
       console.dir(err)
       dispatch(hideLoaderAction())
-      openNotificationWithIcon(messages.notifications.error, messages.notifications.signInTitle, messages.notifications.signInError)
+      openNotificationWithIcon(messages.notifications.error, messages.notifications.signInError)
     })
 }
 
@@ -230,10 +229,10 @@ export const signOut = () => dispatch => {
   axios.defaults.headers.common['Authorization'] = null
   dispatch(logoutAction())
   dispatch(hideLoaderAction())
+  openNotificationWithIcon(messages.notifications.success, messages.notifications.signOutTitle)
 }
 
 // USER REGISTRATION
-
 const register = values => {
   return axios.post(registrationUrl, { ...values })
   .then(response => response.data)

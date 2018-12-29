@@ -125,11 +125,6 @@ class LoginPage extends Component {
             </Link>
           </FormItem>
         </Form>
-        <Link
-          to='/app'
-        >
-          Fake login xD
-        </Link>
       </div>
     )
   }

@@ -13,6 +13,7 @@ import ModalRoot from './ModalRoot'
 import { connect } from 'react-redux'
 import { messages } from './messages'
 import AvatarOptions from './AvatarOptions'
+import { getCategories, authorizationAction } from './actions'
 
 const {
   Header,
@@ -31,6 +32,13 @@ class App extends Component {
     }
 
     this.toogleAvatarOptions = this.toogleAvatarOptions.bind(this)
+  }
+
+  componentDidMount () {
+    if (window.localStorage.getItem('token')) {
+      this.props.authorizationAction()
+      this.props.getCategories()
+    }
   }
 
   toogleAvatarOptions () {
@@ -91,7 +99,8 @@ class App extends Component {
 App.propTypes = {
   children: PropTypes.array,
   loading: PropTypes.bool,
-  isSignedIn: PropTypes.bool
+  isSignedIn: PropTypes.bool,
+  getCategories: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -99,4 +108,4 @@ const mapStateToProps = state => ({
   isSignedIn: state.app.signIn
 })
 
-export default connect(mapStateToProps, {})(App)
+export default connect(mapStateToProps, { getCategories, authorizationAction })(App)

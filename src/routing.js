@@ -9,14 +9,15 @@ import RegistrationPage from './RegistrationPage'
 import AnnouncementDetails from './AnnouncementDetails'
 import { config } from './config'
 import ItemsStore from './ItemsStore'
+import { PrivateRoute } from './PrivateRoute'
 
 const {
     app,
     registration,
-    login,
     itemDetails,
     records,
-    itemsStore
+    itemsStore,
+    login
 } = config.url
 
 const Routing = () => {
@@ -25,13 +26,16 @@ const Routing = () => {
       <BrowserRouter>
         <Switch>
           <App>
+            <PrivateRoute
+              path={app}
+              component={AnnouncementsList}
+            />
             <Route exact path={login} component={LoginPage} />
             <Route exact path={registration} component={RegistrationPage} />
-            <Route exact path={app} component={AnnouncementsList} />
             <Route exact path={itemDetails} component={AnnouncementDetails} />
             <Route exact path={records} component={AnnouncementDetails} />
             <Route exact path={itemsStore} component={ItemsStore} />
-            <Redirect to={login} />
+            <Redirect to={app} />
           </App>
         </Switch>
       </BrowserRouter>

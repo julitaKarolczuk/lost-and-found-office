@@ -59,8 +59,8 @@ export const messages = {
   notifications: {
     success: 'success',
     error: 'error',
-    signInTitle: 'Logowanie',
-    signInSuccess: 'Pomyślnie zalogowano',
+    signInTitle: 'Pomyślnie zalogowano',
+    signOutTitle: 'Pomyślnie wylogowano',
     signInError: 'Logowanie nie powiodło się'
   }
 }

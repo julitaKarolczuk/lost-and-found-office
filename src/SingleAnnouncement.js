@@ -7,6 +7,11 @@ import {
   showAddAnnouncementModal,
   removeItem
 } from './actions'
+import { config } from './config'
+
+const {
+  itemDetailsUrl
+} = config.url
 
 class SingleAnnouncement extends React.Component {
   constructor (props) {
@@ -50,7 +55,7 @@ class SingleAnnouncement extends React.Component {
         style={{ width: 300 }}
         title={name}
         actions={[
-          <Link to={`/announcement-details/${id}`}>
+          <Link to={`${itemDetailsUrl}${id}`}>
             <Icon
               type='info'
             />
