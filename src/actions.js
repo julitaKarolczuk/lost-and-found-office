@@ -22,6 +22,15 @@ const categoriesUrl = `${baseUrl}${categories}`
 const autenticationUrl = `${baseUrl}${authentication}`
 const registrationUrl = `${baseUrl}${registration}`
 
+const setAuthHeader = token => {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token.slice(1, token.length - 1)}`
+}
+
+const loggedInToken = window.localStorage.getItem('token')
+if (loggedInToken) {
+  setAuthHeader(loggedInToken)
+}
+
 // NOTIFICATIONS
 
 export const openNotificationWithIcon = (type, title, text) => {
@@ -205,10 +214,11 @@ export const signIn = values => dispatch => {
       } = userData
 
       window.localStorage.setItem('token', JSON.stringify(token))
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      setAuthHeader(token)
 
       dispatch(authorizationAction())
       dispatch(getUserDataAction(user))
+      dispatch(getCategories())
       dispatch(hideLoaderAction())
       openNotificationWithIcon(messages.notifications.success, messages.notifications.signInTitle)
     })
