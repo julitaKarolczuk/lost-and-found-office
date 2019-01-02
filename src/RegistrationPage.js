@@ -8,7 +8,7 @@ import {
 } from 'antd'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { signUp } from './actions'
+import { signUp } from './Actions'
 import { config } from './config'
 import { messages } from './messages';
 

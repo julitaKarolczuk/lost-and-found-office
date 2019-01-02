@@ -5,7 +5,7 @@ import {
   getItems,
   removeItem,
   editItem
-} from './actions'
+} from './Actions'
 import CardsList from './CardsList'
 
 class ItemsList extends Component {

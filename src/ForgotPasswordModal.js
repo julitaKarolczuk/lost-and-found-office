@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BasicModal from './BasicModal'
 import { connect } from 'react-redux'
-import { hideModal } from './actions'
+import { hideModal } from './Actions'
 import { messages } from './messages'
 
 class ForgotPasswordModal extends Component {

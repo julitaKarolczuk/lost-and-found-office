@@ -5,7 +5,7 @@ import { messages } from './messages'
 import { config } from './config'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { signOut } from './actions'
+import { signOut } from './Actions'
 
 const {
   profile,

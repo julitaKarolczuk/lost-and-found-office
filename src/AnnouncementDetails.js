@@ -5,7 +5,7 @@ import {
   showAddAnnouncementModal,
   getAnnouncementDetails,
   removeAnnouncement
-} from './actions'
+} from './Actions'
 import { connect } from 'react-redux'
 import { messages } from './messages'
 import { withRouter } from 'react-router'

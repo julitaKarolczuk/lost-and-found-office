@@ -15,7 +15,7 @@ import {
   hideModal,
   addAnnouncement,
   getDivisions
-} from './actions'
+} from './Actions'
 import { messages } from './messages'
 import moment from 'moment'
 

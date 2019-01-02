@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {
   hideModal,
   updateUserData
-} from './actions'
+} from './Actions'
 import RegistrationPage from './RegistrationPage'
 
 class UpdateUserdataModal extends Component {

@@ -12,7 +12,7 @@ export const config = {
     user: '/users/{0}'
   },
   url: {
-    app: '/app',
+    app: '/',
     registration: '/registration',
     login: '/login',
     itemDetails: '/announcement-details/:id',
@@ -20,6 +20,7 @@ export const config = {
     records: '/records',
     itemsStore: '/items-store',
     profile: '/profile',
-    announcements: '/announcements'
+    announcements: '/announcements',
+    adminPanel: '/admin-panel'
   }
 }

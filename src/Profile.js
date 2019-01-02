@@ -7,7 +7,7 @@ import {
   getUser,
   showEditUserModal,
   showChangePasswordModal
- } from './actions'
+ } from './Actions'
 
 class Profile extends Component {
   constructor () {

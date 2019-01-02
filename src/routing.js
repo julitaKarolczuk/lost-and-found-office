@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import App from './App'
@@ -32,7 +32,7 @@ const Routing = () => {
         <Switch>
           <App>
             <PrivateRoute
-              path={app}
+              exact path={app}
               component={ItemsList}
             />
             <Route exact path={login} component={LoginPage} />

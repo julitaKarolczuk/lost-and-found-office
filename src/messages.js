@@ -51,7 +51,8 @@ export const messages = {
     lost: 'Zgłoszone',
     store: 'Magazyn',
     records: 'Archiwum',
-    category: 'Kategoria'
+    category: 'Kategoria',
+    adminPanel: 'Panel Administratora'
   },
   avatarOptions: {
     logout: 'Wyloguj',

@@ -13,6 +13,5 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 )
 
 PrivateRoute.propTypes = {
-  component: PropTypes.node,
   location: PropTypes.string
 }

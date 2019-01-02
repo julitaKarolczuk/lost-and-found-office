@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import app from './appReducer'
+import app from './AppReducer'
 import modal from './modalReducer'
 import { reducer as formReducer } from 'redux-form'
 

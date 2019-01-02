@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {
   showAddAnnouncementModal
-} from './actions'
+} from './Actions'
 import { config } from './config'
 
 const {

@@ -16,7 +16,7 @@ import AvatarOptions from './AvatarOptions'
 import {
   getCategories,
   authorizationAction
-} from './actions'
+} from './Actions'
 import qs from 'query-string'
 import { withRouter } from 'react-router'
 import { config } from './config'

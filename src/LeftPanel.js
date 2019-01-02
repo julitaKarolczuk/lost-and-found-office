@@ -15,7 +15,8 @@ const {
   app: appUrl,
   itemsStore,
   records,
-  announcements
+  announcements,
+  adminPanel
 } = config.url
 
 class LeftPanel extends Component {
@@ -45,7 +46,8 @@ class LeftPanel extends Component {
   render () {
     const {
       categories = [],
-      isSignedIn
+      isSignedIn,
+      hasPermission = true
     } = this.props
 
     return (
@@ -92,6 +94,15 @@ class LeftPanel extends Component {
                 {messages.leftPanel.records}
               </NavLink>
             </MenuItem>
+            {hasPermission && (
+              <MenuItem>
+                <NavLink to={{
+                  pathname: adminPanel
+                }}>
+                  {messages.leftPanel.adminPanel}
+                </NavLink>
+              </MenuItem>
+            )}
           </Menu>
         )}
       </Sider>
@@ -101,12 +112,14 @@ class LeftPanel extends Component {
 
 const mapStateToProps = state => ({
   categories: state.app.categories,
-  isSignedIn: state.app.signIn
+  isSignedIn: state.app.signIn,
+  // hasPermission: state.app.user.hasPermission
 })
 
 LeftPanel.propTypes = {
   categories: PropTypes.array,
-  isSignedIn: PropTypes.bool
+  isSignedIn: PropTypes.bool,
+  hasPermission: PropTypes.bool
 }
 
 export default connect(mapStateToProps, {})(LeftPanel)

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {
   showForgotPasswordModal,
   signIn
-} from './actions'
+} from './Actions'
 import { messages } from './messages'
 import {
   Form,

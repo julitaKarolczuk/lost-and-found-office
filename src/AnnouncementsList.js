@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getAnnouncements } from './actions'
+import { getAnnouncements } from './Actions'
 import CardsList from './CardsList'
 
 class AnnouncementsList extends Component {

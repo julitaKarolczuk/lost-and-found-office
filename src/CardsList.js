@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux'
 import {
   showAddAnnouncementModal
-} from './actions'
+} from './Actions'
 import { messages } from './messages'
 
 const { Option } = Select
