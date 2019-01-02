@@ -26,6 +26,7 @@ const autenticationUrl = `${baseUrl}${authentication}`
 const registrationUrl = `${baseUrl}${registration}`
 const itemDetailsUrl = `${baseUrl}${item}`
 const itemsUrl = `${baseUrl}${items}`
+const divisionsUrl = `${baseUrl}${divisions}`
 
 // AXIOS HEADER SETTINGS
 
@@ -354,9 +355,9 @@ const getDivisionsAction = data => ({
 
 export const getDivisions = () => dispatch => {
   dispatch(showLoaderAction())
-  return fetchData(divisions)
+  return fetchData(divisionsUrl)
     .then(data => {
-      dispatch(getDivisionsAction)
+      dispatch(getDivisionsAction(data))
       dispatch(hideLoaderAction())
     })
     .catch((err) => {
