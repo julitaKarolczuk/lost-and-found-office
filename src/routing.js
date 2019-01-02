@@ -11,6 +11,7 @@ import { config } from './config'
 import ItemsStore from './ItemsStore'
 import { PrivateRoute } from './PrivateRoute'
 import Records from './Records'
+import Profile from './Profile'
 
 const {
     app,
@@ -18,7 +19,8 @@ const {
     itemDetails,
     records,
     itemsStore,
-    login
+    login,
+    profile
 } = config.url
 
 const Routing = () => {
@@ -36,7 +38,7 @@ const Routing = () => {
             <Route exact path={itemDetails} component={AnnouncementDetails} />
             <Route exact path={records} component={Records} />
             <Route exact path={itemsStore} component={ItemsStore} />
-            <Redirect to={app} />
+            <Route exact path={profile} component={Profile} />
           </App>
         </Switch>
       </BrowserRouter>

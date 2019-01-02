@@ -4,10 +4,14 @@ import ForgotPasswordModal from './ForgotPasswordModal'
 import { connect } from 'react-redux'
 import * as actionTypes from './actionsTypes'
 import AddAnnouncementModal from './AddAnnouncementModal'
+import UpdateUserDataModal from './UpdateUserDataModal'
+import ChangePasswordModal from './ChangePasswordModal'
 
 const MODAL_COMPONENTS = {
   [actionTypes.FORGOT_PASSWORD_MODAL]: ForgotPasswordModal,
-  [actionTypes.ADD_ITEM_MODAL]: AddAnnouncementModal
+  [actionTypes.ADD_ITEM_MODAL]: AddAnnouncementModal,
+  [actionTypes.EDIT_USER_DATA]: UpdateUserDataModal,
+  [actionTypes.CHANGE_PASSWORD]: ChangePasswordModal
   /* other modals */
 }
 

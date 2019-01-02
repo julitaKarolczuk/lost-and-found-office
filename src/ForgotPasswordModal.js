@@ -1,4 +1,4 @@
-import { Input, Icon, Button } from 'antd'
+import { Input, Icon } from 'antd'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BasicModal from './BasicModal'

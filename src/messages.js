@@ -65,5 +65,10 @@ export const messages = {
     commonError: 'Coś poszło nie tak',
     successRemove: 'Usuwanie powiodło się.',
     successEdit: 'Edycja powiodła się.'
+  },
+  profile: {
+    title: 'Szczegóły profilu',
+    buttonEditData: 'Edytuj profil',
+    buttonEditPassword: 'Zmień hasło'
   }
 }

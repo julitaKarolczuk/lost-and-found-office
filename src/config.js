@@ -8,7 +8,8 @@ export const config = {
     registration: '/users/register',
     items: '/items',
     item: '/items/{0}',
-    divisions: '/divisions'
+    divisions: '/divisions',
+    user: '/users/{0}'
   },
   url: {
     app: '/app',

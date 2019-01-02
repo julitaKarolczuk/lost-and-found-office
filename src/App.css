@@ -72,7 +72,7 @@
 }
 
 .ant-spin.ant-spin-spinning {
-  z-index: 2;
+  z-index: 1002;
   display: flex;
   position: absolute;
   top: 50%;
@@ -116,4 +116,47 @@
   width: 80px;
   margin: auto;
   border: none;
+}
+
+.profile .user-icon {
+  font-size: 100px;
+  border: 4px solid lightgray;
+  border-radius: 50%;
+  padding: 30px;
+}
+
+.profile .user-details {
+  width: 100%;
+  text-align: center;
+  margin: 100px 0 20px;
+}
+
+.profile .buttons {
+  width: 100%;
+  text-align: center;
+}
+
+.profile .buttons button:first-child {
+  margin-right: 20px;
+}
+
+.ant-form-item-label {
+  width: 126px;
+}
+
+.ant-modal-body .ant-form-item-label {
+  text-align: left;
+}
+
+.ant-form-item-control-wrapper {
+  margin-left: 0px;
+}
+
+.ant-layout-sider .anticon-home {
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.ant-layout-sider li.home.ant-menu-item-selected {
+  background: none;
 }

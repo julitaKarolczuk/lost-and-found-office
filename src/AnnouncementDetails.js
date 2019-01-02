@@ -4,8 +4,7 @@ import { Button } from 'antd'
 import {
   showAddAnnouncementModal,
   getAnnouncementDetails,
-  removeAnnouncement,
-  openNotificationWithIcon
+  removeAnnouncement
 } from './actions'
 import { connect } from 'react-redux'
 import { messages } from './messages'
@@ -22,7 +21,6 @@ class AnnouncementDetails extends Component {
   componentDidMount () {
     const id = window.location.href.split('/').pop()
     this.props.getAnnouncementDetails(id)
-    console.log(this.props.history)
   }
 
   openModal () {

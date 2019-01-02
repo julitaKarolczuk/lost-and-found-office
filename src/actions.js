@@ -15,7 +15,8 @@ const {
     registration,
     items,
     item,
-    divisions
+    divisions,
+    user
   }
 } = config
 
@@ -27,6 +28,7 @@ const registrationUrl = `${baseUrl}${registration}`
 const itemDetailsUrl = `${baseUrl}${item}`
 const itemsUrl = `${baseUrl}${items}`
 const divisionsUrl = `${baseUrl}${divisions}`
+const userUrl = `${baseUrl}${user}`
 
 // AXIOS HEADER SETTINGS
 
@@ -44,7 +46,8 @@ if (loggedInToken) {
 export const openNotificationWithIcon = (type, title, text) => {
   notification[type]({
     message: title,
-    description: text
+    description: text,
+    duration: 2.5
   })
 }
 
@@ -76,6 +79,22 @@ export const showAddAnnouncementModal = (item = {}) => dispatch => {
     type: actionsTypes.SHOW_MODAL,
     modalType: actionsTypes.ADD_ITEM_MODAL,
     modalProps: { item }
+  }))
+}
+
+export const showEditUserModal = () => dispatch => {
+  dispatch(showModal({
+    type: actionsTypes.SHOW_MODAL,
+    modalType: actionsTypes.EDIT_USER_DATA,
+    modalProps: {}
+  }))
+}
+
+export const showChangePasswordModal = () => dispatch => {
+  dispatch(showModal({
+    type: actionsTypes.SHOW_MODAL,
+    modalType: actionsTypes.CHANGE_PASSWORD,
+    modalProps: {}
   }))
 }
 
@@ -313,6 +332,7 @@ export const signIn = values => dispatch => {
       } = userData
 
       window.localStorage.setItem('token', JSON.stringify(token))
+      window.localStorage.setItem('user', user.id)
       setAuthHeader(token)
 
       dispatch(authorizationAction())
@@ -357,6 +377,40 @@ export const signUp = values => dispatch => {
     })
 }
 
+// USER
+export const getUser = () => dispatch => {
+  dispatch(showLoaderAction())
+  return fetchData(userUrl.replace('{0}', window.localStorage.getItem('user')))
+    .then(data => {
+      dispatch(getUserDataAction(data))
+      dispatch(hideLoaderAction())
+    })
+    .catch((err) => {
+      console.dir(err)
+      dispatch(hideLoaderAction())
+    })
+}
+
+const updateUser = data => {
+  return axios.put(userUrl.replace('{0}', window.localStorage.getItem('user')), data)
+}
+
+export const updateUserData = data => dispatch => {
+  dispatch(showLoaderAction())
+  return updateUser(data)
+    .then(() => {
+      getUser()
+      dispatch(hideLoaderAction())
+      hideModal()
+      openNotificationWithIcon(messages.notifications.success, messages.notifications.successEdit)
+    })
+    .catch(err => {
+      console.dir(err)
+      dispatch(hideLoaderAction())
+      openNotificationWithIcon(messages.notifications.error, messages.notifications.commonError)
+    })
+}
+
 // DIVISIONS
 const getDivisionsAction = data => ({
   type: actionsTypes.GET_DIVISIONS,
@@ -375,3 +429,4 @@ export const getDivisions = () => dispatch => {
       dispatch(hideLoaderAction())
     })
 }
+

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Icon } from 'antd'
 import MenuItem from 'antd/lib/menu/MenuItem'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
@@ -55,6 +55,18 @@ class LeftPanel extends Component {
       >
         {isSignedIn && (
           <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
+            <MenuItem className='home'>
+              <NavLink to={{
+                pathname: appUrl
+              }}>
+                <Icon
+                  theme='twoTone'
+                  type='home'
+                  twoToneColor='#0a1a38'
+                />
+                LF-Office
+              </NavLink>
+            </MenuItem>
             <SubMenu title={messages.leftPanel.category}>
               {categories.map(this.renderCategory)}
             </SubMenu>
