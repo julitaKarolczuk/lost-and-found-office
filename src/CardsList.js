@@ -19,6 +19,7 @@ class CardsList extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.openModal = this.openModal.bind(this)
+    this.renderItem = this.renderItem.bind(this)
   }
 
   handleChange (value) {

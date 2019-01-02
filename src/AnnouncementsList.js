@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getAnnouncements } from './Actions'
+import {
+  getAnnouncements,
+  editAnnouncement,
+  removeAnnouncement
+} from './Actions'
 import CardsList from './CardsList'
 
 class AnnouncementsList extends Component {
@@ -16,7 +20,11 @@ class AnnouncementsList extends Component {
     } = this.props
 
     return (
-      <CardsList listItems={announcements} />
+      <CardsList
+        listItems={announcements}
+        saveAction={editAnnouncement}
+        deleteAction={removeAnnouncement}
+      />
     )
   }
 }
