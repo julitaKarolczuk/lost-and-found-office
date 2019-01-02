@@ -4,7 +4,7 @@ import { Button } from 'antd'
 import {
   showAddAnnouncementModal,
   getAnnouncementDetails,
-  removeItem,
+  removeAnnouncement,
   openNotificationWithIcon
 } from './actions'
 import { connect } from 'react-redux'
@@ -39,10 +39,10 @@ class AnnouncementDetails extends Component {
       item: {
         id
       },
-      removeItem
+      removeAnnouncement
     } = this.props
 
-    removeItem(id)
+    removeAnnouncement(id)
     this.props.history.goBack()
   }
 
@@ -84,7 +84,7 @@ AnnouncementDetails.propTypes = {
   showAddAnnouncementModal: PropTypes.func,
   item: PropTypes.object,
   getAnnouncementDetails: PropTypes.func,
-  removeItem: PropTypes.func,
+  removeAnnouncement: PropTypes.func,
   history: PropTypes.object
 }
 
@@ -95,5 +95,5 @@ const mapStateToProps = state => ({
 export default withRouter(connect(mapStateToProps, {
   showAddAnnouncementModal,
   getAnnouncementDetails,
-  removeItem
+  removeAnnouncement
 })(AnnouncementDetails))

@@ -5,7 +5,10 @@ export const config = {
     announcementDetails: '/announcements/{0}',
     categories: '/categories',
     authentication: '/users/authenticate',
-    registration: '/users/register'
+    registration: '/users/register',
+    items: '/items',
+    item: '/items/{0}',
+    divisions: '/divisions'
   },
   url: {
     app: '/app',

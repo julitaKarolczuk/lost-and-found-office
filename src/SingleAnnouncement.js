@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {
   showAddAnnouncementModal,
-  removeItem
+  removeAnnouncement
 } from './actions'
 import { config } from './config'
 
@@ -35,10 +35,10 @@ class SingleAnnouncement extends React.Component {
       item: {
         id
       },
-      removeItem
+      removeAnnouncement
     } = this.props
 
-    removeItem(id)
+    removeAnnouncement(id)
   }
 
   render () {
@@ -83,5 +83,5 @@ SingleAnnouncement.propTypes = {
 
 export default connect(null, {
   showAddAnnouncementModal,
-  removeItem
+  removeAnnouncement
 })(SingleAnnouncement)

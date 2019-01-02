@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop=types'
-
+import PropTypes from 'prop-types'
+import { Table } from 'antd'
 
 const columns = [{
   title: 'Nazwa',
@@ -42,7 +42,7 @@ class Records extends Component {
   render () {
     return (
       <div>
-
+        <Table dataSource={dataSource} columns={columns} />
       </div>
     )
   }

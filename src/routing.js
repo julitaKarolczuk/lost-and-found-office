@@ -10,6 +10,7 @@ import AnnouncementDetails from './AnnouncementDetails'
 import { config } from './config'
 import ItemsStore from './ItemsStore'
 import { PrivateRoute } from './PrivateRoute'
+import Records from './Records'
 
 const {
     app,
@@ -33,7 +34,7 @@ const Routing = () => {
             <Route exact path={login} component={LoginPage} />
             <Route exact path={registration} component={RegistrationPage} />
             <Route exact path={itemDetails} component={AnnouncementDetails} />
-            <Route exact path={records} component={AnnouncementDetails} />
+            <Route exact path={records} component={Records} />
             <Route exact path={itemsStore} component={ItemsStore} />
             <Redirect to={app} />
           </App>

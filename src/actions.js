@@ -12,7 +12,10 @@ const {
     announcementDetails,
     categories,
     authentication,
-    registration
+    registration,
+    items,
+    item,
+    divisions
   }
 } = config
 
@@ -21,6 +24,10 @@ const announcementDetailsUrl = `${baseUrl}${announcementDetails}`
 const categoriesUrl = `${baseUrl}${categories}`
 const autenticationUrl = `${baseUrl}${authentication}`
 const registrationUrl = `${baseUrl}${registration}`
+const itemDetailsUrl = `${baseUrl}${item}`
+const itemsUrl = `${baseUrl}${items}`
+
+// AXIOS HEADER SETTINGS
 
 const setAuthHeader = token => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token.slice(1, token.length - 1)}`
@@ -122,10 +129,91 @@ export const getAnnouncements = () => dispatch => {
     })
 }
 
-export const removeItem = id => {
+export const removeAnnouncement = id => {
   return axios.delete(announcementDetailsUrl.replace('{0}', id))
     .then(() => {
       getAnnouncements()
+    })
+    .catch(error => {
+      console.dir(error)
+    })
+}
+
+const editAnnouncementAction = data => ({
+  type: actionsTypes.EDIT_ANNOUNCEMENT,
+  payload: data
+})
+
+export const editAnnouncement = data => dispatch => {
+  dispatch(showLoaderAction())
+  return axios.put(announcementDetailsUrl.replace('{0}', data.id), data)
+    .then(() => {
+      dispatch(editAnnouncementAction(data))
+      dispatch(hideLoaderAction())
+    })
+    .catch(error => {
+      console.dir(error)
+      dispatch(hideLoaderAction())
+    })
+}
+
+const addAnnouncementAction = data => ({
+  type: actionsTypes.ADD_ANNOUNCEMENT,
+  payload: data
+})
+
+export const addAnnouncement = data => dispatch => {
+  dispatch(showLoaderAction())
+  return axios.post(announcementDetailsUrl, data)
+    .then(() => {
+      dispatch(addAnnouncementAction(data))
+      dispatch(hideLoaderAction())
+    })
+    .catch(error => {
+      console.dir(error)
+      dispatch(hideLoaderAction())
+    })
+}
+// ITEMS ACTIONS
+const getItemDetailsAction = data => ({
+  type: actionsTypes.GET_ITEM_DETAILS,
+  payload: data
+})
+
+export const getItemDetails = id => dispatch => {
+  dispatch(showLoaderAction())
+  return fetchData(itemDetailsUrl.replace('{0}', id))
+    .then(data => {
+      dispatch(getItemDetailsAction(data))
+      dispatch(hideLoaderAction())
+    })
+    .catch(error => {
+      console.dir(error)
+      dispatch(hideLoaderAction())
+    })
+}
+const getItemsAction = data => ({
+  type: actionsTypes.GET_ITEMS,
+  payload: data
+})
+
+export const getItems = () => dispatch => {
+  dispatch(showLoaderAction())
+  return fetchData(itemsUrl, { status: 0, pageSize: 5, pageNumber: 1 })
+    .then(data => {
+      dispatch(getItemsAction(data))
+      dispatch(hideLoaderAction())
+    })
+    .catch(error => {
+      console.dir(error)
+      dispatch(hideLoaderAction())
+    })
+}
+
+export const removeItem = id => {
+  return axios.delete(itemDetailsUrl.replace('{0}', id))
+    .then(() => {
+      getItems()
     })
     .catch(error => {
       console.dir(error)
@@ -139,7 +227,7 @@ const editItemAction = data => ({
 
 export const editItem = data => dispatch => {
   dispatch(showLoaderAction())
-  return axios.put(announcementDetailsUrl.replace('{0}', data.id), data)
+  return axios.put(itemDetailsUrl.replace('{0}', data.id), data)
     .then(() => {
       dispatch(editItemAction(data))
       dispatch(hideLoaderAction())
@@ -157,7 +245,7 @@ const addItemAction = data => ({
 
 export const addItem = data => dispatch => {
   dispatch(showLoaderAction())
-  return axios.post(announcementDetailsUrl, data)
+  return axios.post(itemDetailsUrl, data)
     .then(() => {
       dispatch(addItemAction(data))
       dispatch(hideLoaderAction())
@@ -252,6 +340,25 @@ export const signUp = values => dispatch => {
   dispatch(showLoaderAction())
   return register(values)
     .then(() => dispatch(hideLoaderAction()))
+    .catch((err) => {
+      console.dir(err)
+      dispatch(hideLoaderAction())
+    })
+}
+
+// DIVISIONS
+const getDivisionsAction = data => ({
+  type: actionsTypes.GET_DIVISIONS,
+  payload: data
+})
+
+export const getDivisions = () => dispatch => {
+  dispatch(showLoaderAction())
+  return fetchData(divisions)
+    .then(data => {
+      dispatch(getDivisionsAction)
+      dispatch(hideLoaderAction())
+    })
     .catch((err) => {
       console.dir(err)
       dispatch(hideLoaderAction())

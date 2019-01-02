@@ -11,7 +11,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BasicModal from './BasicModal'
 import { connect } from 'react-redux'
-import { hideModal } from './actions'
+import {
+  hideModal,
+  addAnnouncement,
+  getDivisions
+} from './actions'
 import { messages } from './messages'
 import moment from 'moment'
 
@@ -26,6 +30,10 @@ class AddAnnouncementModal extends Component {
     this.onCancelAction = this.onCancelAction.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.normFile = this.normFile.bind(this)
+  }
+
+  componentDidMount () {
+    this.props.getDivisions()
   }
 
   onCancelAction () {
@@ -43,6 +51,7 @@ class AddAnnouncementModal extends Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        addAnnouncement(values)
         console.log('Received values of form: ', values)
       }
     })
@@ -166,7 +175,13 @@ AddAnnouncementModal.propTypes = {
   visible: PropTypes.bool,
   getFieldDecorator: PropTypes.func,
   form: PropTypes.object,
-  item: PropTypes.object
+  item: PropTypes.object,
+  getDivisions: PropTypes.func,
+  addAnnouncement: PropTypes.func
 }
 
-export default Form.create()(connect(null, { hideModal })(AddAnnouncementModal))
+export default Form.create()(connect(null, {
+  hideModal,
+  getDivisions,
+  addAnnouncement
+})(AddAnnouncementModal))

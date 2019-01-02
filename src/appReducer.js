@@ -28,12 +28,12 @@ export default (state = defaultState, action) => {
         ...state,
         currentAnnouncement: payload
       }
-    case actions.ADD_ITEM:
+    case actions.ADD_ANNOUNCEMENT:
       return {
         ...state,
         announcements: [...state.announcements, payload]
       }
-    case actions.EDIT_ITEM:
+    case actions.EDIT_ANNOUNCEMENT:
       return {
         ...state,
         announcements: state.announcements.map(item => {
@@ -62,6 +62,36 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         user: payload
+      }
+    case actions.GET_ITEMS:
+      return {
+        ...state,
+        items: payload
+      }
+    case actions.GET_ITEM_DETAILS:
+      return {
+        ...state,
+        currentItem: payload
+      }
+    case actions.ADD_ITEM:
+      return {
+        ...state,
+        items: [...state.items, payload]
+      }
+    case actions.EDIT_ITEM:
+      return {
+        ...state,
+        items: state.items.map(item => {
+          if (item.id === payload.id) {
+            return payload
+          }
+          return item
+        })
+      }
+    case actions.GET_DIVISIONS:
+      return {
+        ...state,
+        divisions: payload
       }
     default:
       return state

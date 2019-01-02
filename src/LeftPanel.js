@@ -13,7 +13,8 @@ const SubMenu = Menu.SubMenu
 
 const {
   app: appUrl,
-  itemsStore
+  itemsStore,
+  records
 } = config.url
 
 class LeftPanel extends Component {
@@ -76,7 +77,7 @@ class LeftPanel extends Component {
             </MenuItem>
             <MenuItem>
               <NavLink to={{
-                pathname: appUrl
+                pathname: records
               }}>
                 {messages.leftPanel.records}
               </NavLink>
