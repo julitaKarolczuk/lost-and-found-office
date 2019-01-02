@@ -134,9 +134,11 @@ export const removeAnnouncement = id => {
   return axios.delete(announcementDetailsUrl.replace('{0}', id))
     .then(() => {
       getAnnouncements()
+      openNotificationWithIcon(messages.notifications.success, messages.notifications.successRemove)
     })
     .catch(error => {
       console.dir(error)
+      openNotificationWithIcon(messages.notifications.error, messages.notifications.commonError)
     })
 }
 
@@ -151,10 +153,12 @@ export const editAnnouncement = data => dispatch => {
     .then(() => {
       dispatch(editAnnouncementAction(data))
       dispatch(hideLoaderAction())
+      openNotificationWithIcon(messages.notifications.success, messages.notifications.successEdit)
     })
     .catch(error => {
       console.dir(error)
       dispatch(hideLoaderAction())
+      openNotificationWithIcon(messages.notifications.error, messages.notifications.commonError)
     })
 }
 
@@ -165,7 +169,7 @@ const addAnnouncementAction = data => ({
 
 export const addAnnouncement = data => dispatch => {
   dispatch(showLoaderAction())
-  return axios.post(announcementDetailsUrl, data)
+  return axios.post(announcementsUrl, data)
     .then(() => {
       dispatch(addAnnouncementAction(data))
       dispatch(hideLoaderAction())
@@ -173,6 +177,7 @@ export const addAnnouncement = data => dispatch => {
     .catch(error => {
       console.dir(error)
       dispatch(hideLoaderAction())
+      openNotificationWithIcon(messages.notifications.error, messages.notifications.commonError)
     })
 }
 // ITEMS ACTIONS
@@ -215,9 +220,11 @@ export const removeItem = id => {
   return axios.delete(itemDetailsUrl.replace('{0}', id))
     .then(() => {
       getItems()
+      openNotificationWithIcon(messages.notifications.success, messages.notifications.successRemove)
     })
     .catch(error => {
       console.dir(error)
+      openNotificationWithIcon(messages.notifications.error, messages.notifications.commonError)
     })
 }
 
@@ -232,10 +239,12 @@ export const editItem = data => dispatch => {
     .then(() => {
       dispatch(editItemAction(data))
       dispatch(hideLoaderAction())
+      openNotificationWithIcon(messages.notifications.success, messages.notifications.successEdit)
     })
     .catch(error => {
       console.dir(error)
       dispatch(hideLoaderAction())
+      openNotificationWithIcon(messages.notifications.error, messages.notifications.commonError)
     })
 }
 
@@ -254,6 +263,7 @@ export const addItem = data => dispatch => {
     .catch(error => {
       console.dir(error)
       dispatch(hideLoaderAction())
+      openNotificationWithIcon(messages.notifications.error, messages.notifications.commonError)
     })
 }
 

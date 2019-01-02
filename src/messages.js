@@ -61,6 +61,9 @@ export const messages = {
     error: 'error',
     signInTitle: 'Pomyślnie zalogowano',
     signOutTitle: 'Pomyślnie wylogowano',
-    signInError: 'Logowanie nie powiodło się'
+    signInError: 'Logowanie nie powiodło się',
+    commonError: 'Coś poszło nie tak',
+    successRemove: 'Usuwanie powiodło się.',
+    successEdit: 'Edycja powiodła się.'
   }
 }

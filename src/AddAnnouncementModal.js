@@ -51,8 +51,8 @@ class AddAnnouncementModal extends Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        addAnnouncement(values)
-        console.log('Received values of form: ', values)
+        this.props.addAnnouncement(values)
+        console.log(values)
       }
     })
   }
@@ -115,7 +115,7 @@ class AddAnnouncementModal extends Component {
           <FormItem
             label={messages.addItemModal.date}
           >
-            {getFieldDecorator('date-picker', config)(
+            {getFieldDecorator('date', config)(
               <DatePicker />
             )}
           </FormItem>
