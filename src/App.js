@@ -13,7 +13,13 @@ import ModalRoot from './ModalRoot'
 import { connect } from 'react-redux'
 import { messages } from './messages'
 import AvatarOptions from './AvatarOptions'
-import { getCategories, authorizationAction } from './actions'
+import {
+  getCategories,
+  authorizationAction
+} from './actions'
+import qs from 'query-string'
+import { withRouter } from 'react-router'
+import { config } from './config'
 
 const {
   Header,
@@ -22,6 +28,8 @@ const {
 } = Layout
 
 const Search = Input.Search
+
+const { appUrl } = config.url
 
 class App extends Component {
   constructor () {
@@ -32,6 +40,7 @@ class App extends Component {
     }
 
     this.toogleAvatarOptions = this.toogleAvatarOptions.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount () {
@@ -43,6 +52,15 @@ class App extends Component {
 
   toogleAvatarOptions () {
     this.setState(prevState => ({ isAvatarClicked: !prevState.isAvatarClicked }))
+  }
+
+  handleSubmit (value) {
+    this.props.history.push({
+      pathname: appUrl,
+      search: qs.stringify({
+        q: value
+      })
+    })
   }
 
   render () {
@@ -64,7 +82,7 @@ class App extends Component {
                     placeholder={messages.search.placeholder}
                     enterButton={messages.search.button}
                     size='large'
-                    onSearch={value => console.log(value)}
+                    onSearch={this.handleSubmit}
                     className='search'
                   />
                   <div className='avatar'>
@@ -100,7 +118,9 @@ App.propTypes = {
   children: PropTypes.array,
   loading: PropTypes.bool,
   isSignedIn: PropTypes.bool,
-  getCategories: PropTypes.func
+  getCategories: PropTypes.func,
+  history: PropTypes.object,
+  authorizationAction: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -108,4 +128,7 @@ const mapStateToProps = state => ({
   isSignedIn: state.app.signIn
 })
 
-export default connect(mapStateToProps, { getCategories, authorizationAction })(App)
+export default withRouter(connect(mapStateToProps, {
+  getCategories,
+  authorizationAction
+})(App))
