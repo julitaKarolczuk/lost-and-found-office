@@ -44,7 +44,8 @@ export const messages = {
     edit: 'Edytuj',
     remove: 'Usuń',
     createPdf: 'Wygeneruj dokument odbioru',
-    response: 'Odpowiedż na zgłoszenie'
+    response: 'Odpowiedż na zgłoszenie',
+    title: 'SZCZEGÓŁY ZAGUBIONEJ RZECZY'
   },
   leftPanel: {
     lost: 'Zgłoszone',
@@ -70,5 +71,38 @@ export const messages = {
     title: 'Szczegóły profilu',
     buttonEditData: 'Edytuj profil',
     buttonEditPassword: 'Zmień hasło'
+  },
+  appTitle: 'BIURO RZECZY ZNALEZIONYCH',
+  modal: {
+    cancelButton: 'Cancel',
+    acceptButton: 'OK',
+    forgotPasswordModal: {
+      dontRemember: 'Nie pamiętasz hasła',
+      text: 'Na poniżej podany email wyślemy wiadomość wraz z hasłem.',
+      placeholderEmail: 'Podaj Email'
+    }
+  },
+  registrationsPage: {
+    notSamePasswords: 'Hasła nie są takie same!',
+    nameError: 'Wprowadź swoje imię!',
+    lastNameError: 'Wprowadź swoje nazwisko!',
+    loginError: 'Wprowadź swój login!',
+    phoneError: 'Wprowadź swój numer telefonu!',
+    emailRule: 'Email jest niepoprawny!',
+    emailError: 'Wprowadź swój email!',
+    passwordError: 'Wprowadź hasło!',
+    repeatPasswordError: 'Podaj hasło jeszcze raz!',
+    firstName: 'Imię',
+    lastName: 'Nazwisko',
+    login: 'Login',
+    phoneNumber: 'Telefon',
+    email: 'E-mail',
+    newPassword: 'Nowe hasło',
+    password: 'Hasło',
+    repeatPassword: 'Powtórz hasło',
+    permission: 'Zapoznałem/łam sie z ',
+    rules: 'regulaminem',
+    register: 'Zarejestruj'
+
   }
 }

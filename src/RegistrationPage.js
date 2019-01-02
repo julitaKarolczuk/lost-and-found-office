@@ -10,6 +10,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { signUp } from './actions'
 import { config } from './config'
+import { messages } from './messages';
 
 const FormItem = Form.Item
 
@@ -50,7 +51,7 @@ class RegistrationForm extends React.Component {
   compareToFirstPassword (rule, value, callback) {
     const form = this.props.form
     if (value && value !== form.getFieldValue('password')) {
-      callback('Hasła nie są takie same!')
+      callback(messages.registrationsPage.notSamePasswords)
     } else {
       callback()
     }
@@ -111,10 +112,10 @@ class RegistrationForm extends React.Component {
             <Fragment>
               <FormItem
                 {...formItemLayout}
-                label='Imię'
+                label={messages.registrationsPage.firstName}
               >
                 {getFieldDecorator('firstName', {
-                  rules: [{ required: true, message: 'Wprowadź swoje imię!', whitespace: true }],
+                  rules: [{ required: true, message: messages.registrationsPage.nameError, whitespace: true }],
                   initialValue: isProfilePage ? firstName : ''
                 })(
                   <Input />
@@ -122,10 +123,10 @@ class RegistrationForm extends React.Component {
               </FormItem>
               <FormItem
                 {...formItemLayout}
-                label='Nazwisko'
+                label={messages.registrationsPage.lastName}
               >
                 {getFieldDecorator('lastName', {
-                  rules: [{ required: true, message: 'Wprowadź swoje nazwisko!', whitespace: true }],
+                  rules: [{ required: true, message: messages.registrationsPage.lastNameError, whitespace: true }],
                   initialValue: isProfilePage ? lastName : ''
                 })(
                   <Input />
@@ -133,10 +134,10 @@ class RegistrationForm extends React.Component {
               </FormItem>
               <FormItem
                 {...formItemLayout}
-                label='Login'
+                label={messages.registrationsPage.login}
               >
                 {getFieldDecorator('userName', {
-                  rules: [{ required: true, message: 'Wprowadź swój login!', whitespace: false }],
+                  rules: [{ required: true, message: messages.registrationsPage.loginError, whitespace: false }],
                   initialValue: isProfilePage ? userName : ''
                 })(
                   <Input />
@@ -144,10 +145,10 @@ class RegistrationForm extends React.Component {
               </FormItem>
               <FormItem
                 {...formItemLayout}
-                label='Telefon'
+                label={messages.registrationsPage.phoneNumber}
               >
                 {getFieldDecorator('phoneNumber', {
-                  rules: [{ required: true, message: 'Wprowadź swój numer telefonu!', whitespace: false }],
+                  rules: [{ required: true, message: messages.registrationsPage.phoneError, whitespace: false }],
                   initialValue: isProfilePage ? phoneNumber : ''
                 })(
                   <Input />
@@ -159,13 +160,13 @@ class RegistrationForm extends React.Component {
             <Fragment>
               <FormItem
                 {...formItemLayout}
-                label='E-mail'
+                label={messages.registrationsPage.email}
               >
                 {getFieldDecorator('email', {
                   rules: [{
-                    type: 'email', message: 'Email jest niepoprawny!'
+                    type: 'email', message: messages.registrationsPage.emailRule
                   }, {
-                    required: true, message: 'Wprowadź swój email!'
+                    required: true, message: messages.registrationsPage.emailError
                   }],
                   initialValue: isChangePasswordPage ? email : ''
                 })(
@@ -174,11 +175,14 @@ class RegistrationForm extends React.Component {
               </FormItem>
               <FormItem
                 {...formItemLayout}
-                label={isChangePasswordPage ? 'Nowe hasło' : 'Hasło'}
+                label={isChangePasswordPage
+                  ? messages.registrationsPage.newPassword
+                  : messages.registrationsPage.password
+                }
               >
                 {getFieldDecorator('password', {
                   rules: [{
-                    required: true, message: 'Wprowadź hasło!'
+                    required: true, message: messages.registrationsPage.passwordError
                   }, {
                     validator: this.validateToNextPassword
                   }]
@@ -188,11 +192,11 @@ class RegistrationForm extends React.Component {
               </FormItem>
               <FormItem
                 {...formItemLayout}
-                label='Powtórz hasło'
+                label={messages.registrationsPage.repeatPassword}
               >
                 {getFieldDecorator('confirm', {
                   rules: [{
-                    required: true, message: 'Podaj hasło jeszcze raz!'
+                    required: true, message: messages.registrationsPage.repeatPasswordError
                   }, {
                     validator: this.compareToFirstPassword
                   }]
@@ -208,11 +212,16 @@ class RegistrationForm extends React.Component {
                 {getFieldDecorator('agreement', {
                   valuePropName: 'checked'
                 })(
-                  <Checkbox>Zapoznałem/łam sie z <a href=''>regulaminem</a></Checkbox>
+                  <Checkbox>{messages.registrationsPage.permission}<a href=''>{messages.registrationsPage.rules}</a></Checkbox>
                 )}
               </FormItem>
               <FormItem {...tailFormItemLayout}>
-                <Button type='primary' htmlType='submit'>Zarejestruj</Button>
+                <Button
+                  type='primary'
+                  htmlType='submit'
+                >
+                  {messages.registrationsPage.register}
+                </Button>
               </FormItem>
             </Fragment>
           )}

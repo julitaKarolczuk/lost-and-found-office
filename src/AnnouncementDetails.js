@@ -54,7 +54,7 @@ class AnnouncementDetails extends Component {
 
     return (
       <div className='details-page'>
-        <h1>SZCZEGÓŁY ZAGUBIONEJ RZECZY</h1>
+        <h1>{messages.detailsPage.title}</h1>
         <div className='details-buttons-section'>
           <Button onClick={this.openModal}>
             {messages.detailsPage.edit}

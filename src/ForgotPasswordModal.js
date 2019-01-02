@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import BasicModal from './BasicModal'
 import { connect } from 'react-redux'
 import { hideModal } from './actions'
+import { messages } from './messages'
 
 class ForgotPasswordModal extends Component {
   constructor (props) {
@@ -28,15 +29,15 @@ class ForgotPasswordModal extends Component {
         cancelAction={this.onCancelAction}
       >
         <div className='forgot-pass'>
-          <h1>Nie pamiętasz hasła</h1>
+          <h1>{messages.modal.forgotPasswordModal.dontRemember}</h1>
           <h4>
-            Na poniżej podany email wyślemy wiadomość wraz z hasłem.
+            {messages.modal.forgotPasswordModal.text}
           </h4>
           <Input
             prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
             ref={this.userEmail}
             onChange={this.handleChange}
-            placeholder='Podaj Email'
+            placeholder={messages.modal.forgotPasswordModal.placeholderEmail}
           />
         </div>
       </BasicModal>

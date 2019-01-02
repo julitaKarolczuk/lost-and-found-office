@@ -1,6 +1,7 @@
 import { Modal, Button } from 'antd'
 import React from 'react'
 import PropTypes from 'prop-types'
+import { messages } from './messages'
 
 const BasicModal = ({
   title = '',
@@ -9,9 +10,18 @@ const BasicModal = ({
   cancelAction = () => {},
   children = null,
   footer = [
-    <Button key='back' onClick={cancelAction}>Cancel</Button>,
-    <Button key='submit' type='primary' onClick={acceptAction}>
-      Ok
+    <Button
+      key='back'
+      onClick={cancelAction}
+    >
+      {messages.modal.cancelButton}
+    </Button>,
+    <Button
+      key='submit'
+      type='primary'
+      onClick={acceptAction}
+    >
+      {messages.modal.acceptButton}
     </Button>
   ]
 }) => {

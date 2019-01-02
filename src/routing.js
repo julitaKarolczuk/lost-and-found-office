@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import App from './App'
@@ -12,7 +12,7 @@ import ItemsStore from './ItemsStore'
 import { PrivateRoute } from './PrivateRoute'
 import Records from './Records'
 import Profile from './Profile'
-import ItemsList from './ItemsList';
+import ItemsList from './ItemsList'
 
 const {
     app,

@@ -98,7 +98,7 @@ class App extends Component {
                   </div>
                 </div>
               ) : (
-                <h1>BIURO RZECZY ZNALEZIONYCH</h1>
+                <h1>{messages.appTitle}</h1>
               )}
             </Header>
             <Content style={{ margin: '24px 16px', padding: 24, background: '#fff'}}>
