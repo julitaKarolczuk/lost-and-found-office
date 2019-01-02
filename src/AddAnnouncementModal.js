@@ -52,7 +52,6 @@ class AddAnnouncementModal extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.addAnnouncement(values)
-        console.log(values)
       }
     })
   }

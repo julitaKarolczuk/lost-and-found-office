@@ -19,6 +19,7 @@ export const config = {
     itemDetailsUrl: '/announcement-details/',
     records: '/records',
     itemsStore: '/items-store',
-    profile: '/profile'
+    profile: '/profile',
+    announcements: '/announcements'
   }
 }

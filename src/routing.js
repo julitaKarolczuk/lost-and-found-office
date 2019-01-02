@@ -12,6 +12,7 @@ import ItemsStore from './ItemsStore'
 import { PrivateRoute } from './PrivateRoute'
 import Records from './Records'
 import Profile from './Profile'
+import ItemsList from './ItemsList';
 
 const {
     app,
@@ -20,7 +21,8 @@ const {
     records,
     itemsStore,
     login,
-    profile
+    profile,
+    announcements
 } = config.url
 
 const Routing = () => {
@@ -31,7 +33,7 @@ const Routing = () => {
           <App>
             <PrivateRoute
               path={app}
-              component={AnnouncementsList}
+              component={ItemsList}
             />
             <Route exact path={login} component={LoginPage} />
             <Route exact path={registration} component={RegistrationPage} />
@@ -39,6 +41,7 @@ const Routing = () => {
             <Route exact path={records} component={Records} />
             <Route exact path={itemsStore} component={ItemsStore} />
             <Route exact path={profile} component={Profile} />
+            <Route exact path={announcements} component={AnnouncementsList} />
           </App>
         </Switch>
       </BrowserRouter>

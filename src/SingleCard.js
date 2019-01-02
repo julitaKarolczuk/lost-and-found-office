@@ -4,8 +4,7 @@ import { Card, Icon } from 'antd'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {
-  showAddAnnouncementModal,
-  removeAnnouncement
+  showAddAnnouncementModal
 } from './actions'
 import { config } from './config'
 
@@ -13,32 +12,33 @@ const {
   itemDetailsUrl
 } = config.url
 
-class SingleAnnouncement extends React.Component {
+class SingleCard extends React.Component {
   constructor (props) {
     super(props)
 
-    this.editAnnouncement = this.editAnnouncement.bind(this)
-    this.removeAnnouncemet = this.removeAnnouncemet.bind(this)
+    this.editAction = this.editAction.bind(this)
+    this.removeAction = this.removeAction.bind(this)
   }
 
-  editAnnouncement () {
+  editAction () {
     const {
       item,
-      showAddAnnouncementModal
+      showAddAnnouncementModal,
+      saveAction
     } = this.props
 
-    showAddAnnouncementModal(item)
+    showAddAnnouncementModal(item, saveAction)
   }
 
-  removeAnnouncemet () {
+  removeAction () {
     const {
       item: {
         id
       },
-      removeAnnouncement
+      removeAction
     } = this.props
 
-    removeAnnouncement(id)
+    removeAction(id)
   }
 
   render () {
@@ -62,11 +62,11 @@ class SingleAnnouncement extends React.Component {
           </Link>,
           <Icon
             type='edit'
-            onClick={this.editAnnouncement}
+            onClick={this.editAction}
           />,
           <Icon
             type='delete'
-            onClick={this.removeAnnouncemet}
+            onClick={this.removeAction}
           />
         ]}
       >
@@ -76,12 +76,13 @@ class SingleAnnouncement extends React.Component {
   }
 }
 
-SingleAnnouncement.propTypes = {
+SingleCard.propTypes = {
   showAddAnnouncementModal: PropTypes.func,
-  item: PropTypes.object
+  item: PropTypes.object,
+  removeAction: PropTypes.func,
+  saveAction: PropTypes.func
 }
 
 export default connect(null, {
-  showAddAnnouncementModal,
-  removeAnnouncement
-})(SingleAnnouncement)
+  showAddAnnouncementModal
+})(SingleCard)

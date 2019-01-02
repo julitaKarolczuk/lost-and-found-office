@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import SingleAnnouncement from './SingleAnnouncement'
-import { Button, Select } from 'antd'
+import SingleCard from './SingleCard'
+import {
+  Button,
+  Select
+} from 'antd'
 import { connect } from 'react-redux'
 import {
-  getAnnouncements,
-  showAddAnnouncementModal,
-  getItems
+  showAddAnnouncementModal
 } from './actions'
 import { messages } from './messages'
 
@@ -29,10 +30,17 @@ class CardsList extends Component {
   }
 
   renderItem (item) {
+    const {
+      saveAction,
+      deleteAction
+    } = this.props
+
     return (
-      <SingleAnnouncement
+      <SingleCard
         item={item}
         key={item.id}
+        saveAction={saveAction}
+        deleteAction={deleteAction}
       />
     )
   }
@@ -68,13 +76,12 @@ class CardsList extends Component {
 }
 
 CardsList.propTypes = {
-  getAnnouncements: PropTypes.func,
   showAddAnnouncementModal: PropTypes.func,
-  listItems: PropTypes.array
+  listItems: PropTypes.array,
+  saveAction: PropTypes.func,
+  deleteAction: PropTypes.func
 }
 
 export default connect(null, {
-  getAnnouncements,
-  showAddAnnouncementModal,
-  getItems
+  showAddAnnouncementModal
 })(CardsList)
