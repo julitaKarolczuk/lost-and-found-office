@@ -26,6 +26,7 @@ class ItemsList extends Component {
         listItems={items}
         saveAction={editItem}
         deleteAction={removeItem}
+        isItemsPage
       />
     )
   }

@@ -27,7 +27,7 @@ class SingleCard extends React.Component {
       saveAction
     } = this.props
 
-    showAddAnnouncementModal(item, saveAction)
+    showAddAnnouncementModal({ item, saveAction })
   }
 
   removeAction () {

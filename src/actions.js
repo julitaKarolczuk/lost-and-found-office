@@ -3,6 +3,7 @@ import axios from 'axios'
 import { config } from './config'
 import { notification } from 'antd'
 import { messages } from './messages'
+import moment from 'moment'
 
 // ENDPOINTS
 const {
@@ -74,11 +75,15 @@ export const showForgotPasswordModal = () => dispatch => {
   }))
 }
 
-export const showAddAnnouncementModal = (item = {}) => dispatch => {
+export const showAddAnnouncementModal = ({
+  item = {},
+  isItemsPage = false,
+  saveAction = () => {}
+} = {}) => dispatch => {
   dispatch(showModal({
     type: actionsTypes.SHOW_MODAL,
     modalType: actionsTypes.ADD_ITEM_MODAL,
-    modalProps: { item }
+    modalProps: { item, isItemsPage, saveAction }
   }))
 }
 
@@ -188,7 +193,11 @@ const addAnnouncementAction = data => ({
 
 export const addAnnouncement = data => dispatch => {
   dispatch(showLoaderAction())
-  return axios.post(announcementsUrl, data)
+  const {
+    lostDate,
+    ...rest
+  } = data
+  return axios.post(announcementsUrl, { ...rest, lostDate: moment(lostDate).valueOf() })
     .then(() => {
       dispatch(addAnnouncementAction(data))
       dispatch(hideLoaderAction())

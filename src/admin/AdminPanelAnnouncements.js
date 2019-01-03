@@ -27,7 +27,7 @@ class AdminPanelAnnouncements extends Component {
 
   editItem (record) {
     return () => {
-      this.props.showAddAnnouncementModal(record)
+      this.props.showAddAnnouncementModal({ item: record })
     }
   }
 

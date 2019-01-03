@@ -29,7 +29,7 @@ class AnnouncementDetails extends Component {
       showAddAnnouncementModal
     } = this.props
 
-    showAddAnnouncementModal(item)
+    showAddAnnouncementModal({ item })
   }
 
   removeItem () {

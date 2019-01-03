@@ -1,7 +1,5 @@
 import {
   Form,
-  Icon,
-  Upload,
   Input,
   DatePicker,
   Select,
@@ -14,7 +12,8 @@ import { connect } from 'react-redux'
 import {
   hideModal,
   addAnnouncement,
-  getDivisions
+  getDivisions,
+  getCategories
 } from './Actions'
 import { messages } from './messages'
 import moment from 'moment'
@@ -34,6 +33,7 @@ class AddAnnouncementModal extends Component {
 
   componentDidMount () {
     this.props.getDivisions()
+    this.props.getCategories()
   }
 
   onCancelAction () {
@@ -56,12 +56,26 @@ class AddAnnouncementModal extends Component {
     })
   }
 
+  renderOption ({ id, name }) {
+    return (
+      <Option
+        value={id}
+        key={`${name}-${id}`}
+      >
+        {name}
+      </Option>
+    )
+  }
+
   render () {
     const {
       form: {
         getFieldDecorator
       },
-      item
+      item,
+      divisions = [],
+      categories = [],
+      isItemsPage = false
     } = this.props
 
     const isEditModal = JSON.stringify(item) !== '{}'
@@ -86,7 +100,7 @@ class AddAnnouncementModal extends Component {
           <FormItem
             label={messages.addItemModal.title}
           >
-            {getFieldDecorator('title', {
+            {getFieldDecorator('name', {
               rules: [{
                 required: true,
                 message: messages.addItemModal.rules.title
@@ -112,30 +126,43 @@ class AddAnnouncementModal extends Component {
             )}
           </FormItem>
           <FormItem
-            label={messages.addItemModal.date}
+            label={messages.addItemModal.category}
           >
-            {getFieldDecorator('date', config)(
-              <DatePicker />
-            )}
-          </FormItem>
-          <FormItem
-            label={messages.addItemModal.place}
-          >
-            {getFieldDecorator('place', {
+            {getFieldDecorator('categoryId', {
               rules: [{
                 required: true,
-                message: messages.addItemModal.rules.place
-              }],
-              initialValue: isEditModal ? item.division : ''
+                message: messages.addItemModal.rules.calegory
+              }]
             })(
-              <Select defaultValue='1'>
-                <Option value='1'>Option 1</Option>
-                <Option value='2'>Option 2</Option>
-                <Option value='3'>Option 3</Option>
+              <Select>
+                {categories.map(this.renderOption)}
               </Select>
             )}
           </FormItem>
+          {!isItemsPage && (
+            <FormItem
+              label={messages.addItemModal.date}
+            >
+              {getFieldDecorator('lostDate', config)(
+                <DatePicker />
+              )}
+            </FormItem>
+          )}
           <FormItem
+            label={messages.addItemModal.place}
+          >
+            {getFieldDecorator('divisionId', {
+              rules: [{
+                required: true,
+                message: messages.addItemModal.rules.place
+              }]
+            })(
+              <Select>
+                {divisions.map(this.renderOption)}
+              </Select>
+            )}
+          </FormItem>
+          {/* <FormItem
             label={messages.addItemModal.label}
           >
             <div className='dropbox'>
@@ -152,7 +179,7 @@ class AddAnnouncementModal extends Component {
                 </Upload.Dragger>
               )}
             </div>
-          </FormItem>
+          </FormItem> */}
           <FormItem>
             <Button
               type='primary'
@@ -176,11 +203,21 @@ AddAnnouncementModal.propTypes = {
   form: PropTypes.object,
   item: PropTypes.object,
   getDivisions: PropTypes.func,
-  addAnnouncement: PropTypes.func
+  addAnnouncement: PropTypes.func,
+  divisions: PropTypes.array,
+  categories: PropTypes.array,
+  getCategories: PropTypes.func,
+  isItemsPage: PropTypes.bool
 }
 
-export default Form.create()(connect(null, {
+const mapStateToProps = state => ({
+  divisions: state.app.divisions,
+  categories: state.app.categories
+})
+
+export default Form.create()(connect(mapStateToProps, {
   hideModal,
   getDivisions,
+  getCategories,
   addAnnouncement
 })(AddAnnouncementModal))

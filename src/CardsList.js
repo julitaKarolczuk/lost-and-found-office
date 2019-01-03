@@ -27,7 +27,7 @@ class CardsList extends Component {
   }
 
   openModal () {
-    this.props.showAddAnnouncementModal()
+    this.props.showAddAnnouncementModal({ isItemPage: this.props.isItemsPage })
   }
 
   renderItem (item) {
@@ -80,7 +80,8 @@ CardsList.propTypes = {
   showAddAnnouncementModal: PropTypes.func,
   listItems: PropTypes.array,
   saveAction: PropTypes.func,
-  deleteAction: PropTypes.func
+  deleteAction: PropTypes.func,
+  isItemsPage: PropTypes.bool
 }
 
 export default connect(null, {

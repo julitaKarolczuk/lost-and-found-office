@@ -22,12 +22,12 @@ class AdminPanelCategories extends Component {
   }
 
   addItem () {
-    this.props.showAddAnnouncementModal()
+    this.props.showAddAnnouncementModal({ isItemsPage: true })
   }
 
   editItem (record) {
     return () => {
-      this.props.showAddAnnouncementModal(record)
+      this.props.showAddAnnouncementModal({ item: record, isItemsPage: true })
     }
   }
 

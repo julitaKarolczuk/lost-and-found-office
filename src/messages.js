@@ -24,7 +24,8 @@ export const messages = {
       title: 'Podaj tytuł ogłoszenia!',
       datePicker: 'Wybierz datę zdarzenia!',
       description: 'Dodaj opis przedmiotu!',
-      place: 'Podaj miejsce zdarzenia!'
+      place: 'Podaj miejsce zdarzenia!',
+      category: 'Wybierz kategorię!'
     },
     label: 'Zdjęcie',
     upload: 'Kliknij lub przeciągnij plik',
@@ -32,7 +33,8 @@ export const messages = {
     description: 'Opis przedmiotu',
     place: 'Miejsce zdarzenia',
     date: 'Data zdarzenia',
-    buttonSubmit: 'Dodaj'
+    buttonSubmit: 'Dodaj',
+    category: 'Kategoria'
   },
   announcementsPage: {
     buttonAdd: 'Dodaj znalezisko',
