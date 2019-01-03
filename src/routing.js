@@ -25,7 +25,6 @@ const {
     registration,
     itemDetails,
     records,
-    itemsStore,
     login,
     profile,
     items,
@@ -51,7 +50,6 @@ const Routing = () => {
             <Route exact path={registration} component={RegistrationPage} />
             <Route exact path={itemDetails} component={AnnouncementDetails} />
             <Route exact path={records} component={Records} />
-            <Route exact path={itemsStore} component={ItemsStore} />
             <Route exact path={profile} component={Profile} />
             <Route exact path={items} component={ItemsList} />
             <Route exact path={adminPanelCategories} component={AdminPanelCategories} />

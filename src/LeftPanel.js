@@ -70,7 +70,7 @@ class LeftPanel extends Component {
                   LF-Office
                 </NavLink>
               </MenuItem>
-              <SubMenu title={messages.leftPanel.category}>
+              <SubMenu title={messages.leftPanel.store}>
                 {categories.map(this.renderCategory)}
               </SubMenu>
               <MenuItem>
@@ -78,13 +78,6 @@ class LeftPanel extends Component {
                   pathname: items
                 }}>
                   {messages.leftPanel.lost}
-                </NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink to={{
-                  pathname: itemsStore
-                }}>
-                  {messages.leftPanel.store}
                 </NavLink>
               </MenuItem>
               <MenuItem>
