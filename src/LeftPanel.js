@@ -7,6 +7,8 @@ import { NavLink } from 'react-router-dom'
 import { messages } from './messages'
 import { config } from './config'
 import qs from 'query-string'
+import { getAnnouncements } from './Actions'
+import { withRouter } from 'react-router'
 
 const { Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -25,17 +27,27 @@ class LeftPanel extends Component {
     this.state = {
       collapsed: false
     }
+
+    this.fetchData = this.fetchData.bind(this)
+    this.renderCategory = this.renderCategory.bind(this)
+  }
+
+  fetchData () {
+    const query = qs.parse(this.props.history.location.search)
+    this.props.getAnnouncements({ ...query })
   }
 
   renderCategory ({id, name}) {
     return (
-      <MenuItem key={id}>
-        <NavLink to={{
-          pathname: appUrl,
-          search: qs.stringify({
-            id
-          })
-        }}>
+      <MenuItem key={id} onClick={this.fetchData}>
+        <NavLink
+          to={{
+            pathname: appUrl,
+            search: qs.stringify({
+              categoryId: id
+            })
+          }}
+        >
           {name}
         </NavLink>
       </MenuItem>
@@ -48,13 +60,16 @@ class LeftPanel extends Component {
       isSignedIn
     } = this.props
 
+    const isAdmin = window.localStorage.getItem('isAdmin')
+    const isEmployee = window.localStorage.getItem('isEmp')
+
     return (
       <Sider
         trigger={null}
         collapsible
         collapsed={this.state.collapsed}
       >
-        {isSignedIn && (
+        {isSignedIn && (isAdmin || isEmployee) && (
           <Fragment>
             <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
               <MenuItem className='home'>
@@ -88,7 +103,7 @@ class LeftPanel extends Component {
               </MenuItem>
             </Menu>
             <div>
-              {true && (
+              {window.localStorage.getItem('isAdmin') && (
                 <NavLink
                   className='admin-button'
                   to={{
@@ -99,6 +114,22 @@ class LeftPanel extends Component {
               )}
             </div>
           </Fragment>
+        )}
+        {isSignedIn && (!isAdmin && !isEmployee) && (
+          <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
+            <MenuItem className='home'>
+              <NavLink to={{
+                pathname: appUrl
+              }}>
+                <Icon
+                  theme='twoTone'
+                  type='home'
+                  twoToneColor='#0a1a38'
+                />
+                LF-Office
+              </NavLink>
+            </MenuItem>
+          </Menu>
         )}
       </Sider>
     )
@@ -112,7 +143,9 @@ const mapStateToProps = state => ({
 
 LeftPanel.propTypes = {
   categories: PropTypes.array,
-  isSignedIn: PropTypes.bool
+  isSignedIn: PropTypes.bool,
+  getAnnouncements: PropTypes.func,
+  history: PropTypes.object
 }
 
-export default connect(mapStateToProps, {})(LeftPanel)
+export default withRouter(connect(mapStateToProps, { getAnnouncements })(LeftPanel))

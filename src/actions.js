@@ -4,6 +4,7 @@ import { config } from './config'
 import { notification } from 'antd'
 import { messages } from './messages'
 import moment from 'moment'
+import Blob from 'blob'
 
 // ENDPOINTS
 const {
@@ -17,7 +18,8 @@ const {
     items,
     item,
     divisions,
-    user
+    user,
+    pdf
   }
 } = config
 
@@ -30,6 +32,7 @@ const itemDetailsUrl = `${baseUrl}${item}`
 const itemsUrl = `${baseUrl}${items}`
 const divisionsUrl = `${baseUrl}${divisions}`
 const userUrl = `${baseUrl}${user}`
+const pdfUrl = `${baseUrl}${pdf}`
 
 // AXIOS HEADER SETTINGS
 
@@ -136,14 +139,15 @@ export const getAnnouncementDetails = id => dispatch => {
       dispatch(hideLoaderAction())
     })
 }
+
 const getAnnouncementsAction = data => ({
   type: actionsTypes.GET_ANNOUNCEMENTS,
   payload: data
 })
 
-export const getAnnouncements = () => dispatch => {
+export const getAnnouncements = (params = {}) => dispatch => {
   dispatch(showLoaderAction())
-  return fetchData(announcementsUrl, { status: 0, pageSize: 5, pageNumber: 1 })
+  return fetchData(announcementsUrl, params)
     .then(data => {
       dispatch(getAnnouncementsAction(data))
       dispatch(hideLoaderAction())
@@ -154,7 +158,7 @@ export const getAnnouncements = () => dispatch => {
     })
 }
 
-export const removeAnnouncement = id => {
+export const removeAnnouncement = id => () => {
   return axios.delete(announcementDetailsUrl.replace('{0}', id))
     .then(() => {
       getAnnouncements()
@@ -342,6 +346,8 @@ export const signIn = values => dispatch => {
 
       window.localStorage.setItem('token', JSON.stringify(token))
       window.localStorage.setItem('user', user.id)
+      window.localStorage.setItem('isAdmin', user.isAdministrator)
+      window.localStorage.setItem('isEmp', user.isEmployee)
       setAuthHeader(token)
 
       dispatch(authorizationAction())
@@ -364,6 +370,9 @@ const logoutAction = () => ({
 export const signOut = () => dispatch => {
   dispatch(showLoaderAction())
   window.localStorage.removeItem('token')
+  window.localStorage.removeItem('user')
+  window.localStorage.removeItem('isAdmin')
+  window.localStorage.removeItem('isEmp')
   axios.defaults.headers.common['Authorization'] = null
   dispatch(logoutAction())
   dispatch(hideLoaderAction())
@@ -439,3 +448,15 @@ export const getDivisions = () => dispatch => {
     })
 }
 
+// PDF
+export const generatePDF = () => {
+  return axios.get(pdfUrl, { responseType: 'blob' })
+  .then((response) => {
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'doc.pdf')
+    document.body.appendChild(link)
+    link.click()
+  })
+}

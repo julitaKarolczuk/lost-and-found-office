@@ -4,7 +4,8 @@ import { Button } from 'antd'
 import {
   showAddAnnouncementModal,
   getAnnouncementDetails,
-  removeAnnouncement
+  removeAnnouncement,
+  generatePDF
 } from './Actions'
 import { connect } from 'react-redux'
 import { messages } from './messages'
@@ -36,12 +37,16 @@ class AnnouncementDetails extends Component {
     const {
       item: {
         id
-      },
+      } = {},
       removeAnnouncement
     } = this.props
 
     removeAnnouncement(id)
     this.props.history.goBack()
+  }
+
+  downloadFile () {
+    generatePDF()
   }
 
   render () {
@@ -62,7 +67,7 @@ class AnnouncementDetails extends Component {
           <Button onClick={this.removeItem}>
             {messages.detailsPage.remove}
           </Button>
-          <Button>
+          <Button onClick={this.downloadFile}>
             {messages.detailsPage.createPdf}
           </Button>
           <Button>

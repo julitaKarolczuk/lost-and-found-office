@@ -12,7 +12,9 @@ export const config = {
     divisions: '/divisions',
     division: '/divisions/{0}',
     users: '/users',
-    user: '/users/{0}'
+    user: '/users/{0}',
+    search: '/Search',
+    pdf: '/pdf'
   },
   url: {
     app: '/',

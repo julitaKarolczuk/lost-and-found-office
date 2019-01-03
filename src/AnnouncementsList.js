@@ -7,11 +7,14 @@ import {
   removeAnnouncement
 } from './Actions'
 import CardsList from './CardsList'
+import { withRouter } from 'react-router'
+import qs from 'query-string'
 
 class AnnouncementsList extends Component {
 
   componentDidMount () {
-    this.props.getAnnouncements()
+    const query = qs.parse(this.props.history.location.search)
+    this.props.getAnnouncements({ ...query })
   }
 
   render () {
@@ -35,9 +38,10 @@ const mapStateToProps = state => ({
 
 AnnouncementsList.propTypes = {
   getAnnouncements: PropTypes.func,
-  announcements: PropTypes.array
+  announcements: PropTypes.array,
+  history: PropTypes.object
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   getAnnouncements
-})(AnnouncementsList)
+})(AnnouncementsList))
