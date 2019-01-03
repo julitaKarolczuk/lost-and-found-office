@@ -60,11 +60,11 @@ export const addDivision = data => dispatch => {
 
 // categories
 
-export const showAddCategoryModal = () => dispatch => {
+export const showAddCategoryModal = (item = {}) => dispatch => {
   dispatch(showModal({
     type: actionsTypes.SHOW_MODAL,
     modalType: actionsTypes.ADD_CATEGORY,
-    modalProps: {}
+    modalProps: { item }
   }))
 }
 
@@ -99,27 +99,27 @@ export const getUsers = () => dispatch => {
   return axios.get(usersUrl)
   .then(response => response.data)
     .then(data => {
-      getUsersAction(data)
+      dispatch(getUsersAction(data))
     })
 }
 
-export const showAddUserModal = () => dispatch => {
+export const showAddUserModal = (item = {}) => dispatch => {
   dispatch(showModal({
     type: actionsTypes.SHOW_MODAL,
     modalType: actionsTypes.ADD_USER,
-    modalProps: {}
+    modalProps: { item }
   }))
 }
 
 export const editUser = (id, data) => dispatch => {
-  return axios.patch(categoryDetailsUrl.replace('{0}', id), data)
+  return axios.patch(userUrl.replace('{0}', id), data)
     .then(() => {
       dispatch(getUsers())
     })
 }
 
 export const removeUser = id => dispatch => {
-  return axios.delete(categoryDetailsUrl.replace('{0}', id))
+  return axios.delete(userUrl.replace('{0}', id))
     .then(() => {
       dispatch(getUsers())
     })

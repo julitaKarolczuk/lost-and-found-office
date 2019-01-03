@@ -7,13 +7,17 @@ import AddAnnouncementModal from './AddAnnouncementModal'
 import UpdateUserDataModal from './UpdateUserDataModal'
 import ChangePasswordModal from './ChangePasswordModal'
 import AddDivisionModal from './admin/AddDivisionModal'
+import AddCategoryModal from './admin/AddCategoryModal'
+import AddUserModal from './admin/AddUserModal'
 
 const MODAL_COMPONENTS = {
   [actionTypes.FORGOT_PASSWORD_MODAL]: ForgotPasswordModal,
   [actionTypes.ADD_ITEM_MODAL]: AddAnnouncementModal,
   [actionTypes.EDIT_USER_DATA]: UpdateUserDataModal,
   [actionTypes.CHANGE_PASSWORD]: ChangePasswordModal,
-  [actionTypes.ADD_DIVISION]: AddDivisionModal
+  [actionTypes.ADD_DIVISION]: AddDivisionModal,
+  [actionTypes.ADD_CATEGORY]: AddCategoryModal,
+  [actionTypes.ADD_USER]: AddUserModal
   /* other modals */
 }
 

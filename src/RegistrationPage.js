@@ -38,7 +38,7 @@ class RegistrationForm extends React.Component {
       if (!err) {
         this.props.signUp(values)
           .then(() => this.props.history.push(login))
-        console.log('Received values of form: ', values)
+        // console.log('Received values of form: ', values)
       }
     })
   }
@@ -78,7 +78,9 @@ class RegistrationForm extends React.Component {
         lastName,
         email = '',
         phoneNumber = 123456789
-      } = {}
+      } = {},
+      admin = false,
+      item = {}
     } = this.props
 
     const formItemLayout = {
@@ -105,6 +107,8 @@ class RegistrationForm extends React.Component {
       }
     }
 
+    const isEditModal = JSON.stringify(item) !== '{}'
+
     return (
       <div className='registration-form-page'>
         <Form onSubmit={this.handleSubmit}>
@@ -116,7 +120,11 @@ class RegistrationForm extends React.Component {
               >
                 {getFieldDecorator('firstName', {
                   rules: [{ required: true, message: messages.registrationsPage.nameError, whitespace: true }],
-                  initialValue: isProfilePage ? firstName : ''
+                  initialValue: isProfilePage || isEditModal
+                    ? isEditModal
+                      ? item.firstName
+                      : firstName
+                    : ''
                 })(
                   <Input />
                 )}
@@ -127,7 +135,11 @@ class RegistrationForm extends React.Component {
               >
                 {getFieldDecorator('lastName', {
                   rules: [{ required: true, message: messages.registrationsPage.lastNameError, whitespace: true }],
-                  initialValue: isProfilePage ? lastName : ''
+                  initialValue: isProfilePage || isEditModal
+                    ? isEditModal
+                      ? item.lastName
+                      : lastName
+                    : ''
                 })(
                   <Input />
                 )}
@@ -138,7 +150,11 @@ class RegistrationForm extends React.Component {
               >
                 {getFieldDecorator('userName', {
                   rules: [{ required: true, message: messages.registrationsPage.loginError, whitespace: false }],
-                  initialValue: isProfilePage ? userName : ''
+                  initialValue: isProfilePage || isEditModal
+                    ? isEditModal
+                      ? item.userName
+                      : userName
+                    : ''
                 })(
                   <Input />
                 )}
@@ -149,7 +165,11 @@ class RegistrationForm extends React.Component {
               >
                 {getFieldDecorator('phoneNumber', {
                   rules: [{ required: true, message: messages.registrationsPage.phoneError, whitespace: false }],
-                  initialValue: isProfilePage ? phoneNumber : ''
+                  initialValue: isProfilePage || isEditModal
+                    ? isEditModal
+                      ? item.phoneNumber
+                      : phoneNumber
+                    : ''
                 })(
                   <Input />
                 )}
@@ -168,7 +188,11 @@ class RegistrationForm extends React.Component {
                   }, {
                     required: true, message: messages.registrationsPage.emailError
                   }],
-                  initialValue: isChangePasswordPage ? email : ''
+                  initialValue: isChangePasswordPage || isEditModal
+                  ? isEditModal
+                    ? item.email
+                    : email
+                  : ''
                 })(
                   <Input />
                 )}
@@ -206,25 +230,24 @@ class RegistrationForm extends React.Component {
               </FormItem>
             </Fragment>
           )}
-          {(!isProfilePage && !isChangePasswordPage) && (
-            <Fragment>
+          <Fragment>
+            {(!isProfilePage && !isChangePasswordPage && !admin) && (
               <FormItem {...tailFormItemLayout}>
                 {getFieldDecorator('agreement', {
                   valuePropName: 'checked'
                 })(
                   <Checkbox>{messages.registrationsPage.permission}<a href=''>{messages.registrationsPage.rules}</a></Checkbox>
                 )}
-              </FormItem>
-              <FormItem {...tailFormItemLayout}>
-                <Button
-                  type='primary'
-                  htmlType='submit'
-                >
-                  {messages.registrationsPage.register}
-                </Button>
-              </FormItem>
-            </Fragment>
-          )}
+              </FormItem>)}
+            <FormItem {...tailFormItemLayout}>
+              <Button
+                type='primary'
+                htmlType='submit'
+              >
+                {messages.registrationsPage.register}
+              </Button>
+            </FormItem>
+          </Fragment>
         </Form>
       </div>
     )
@@ -241,7 +264,8 @@ RegistrationForm.propTypes = {
   signUp: PropTypes.func,
   user: PropTypes.object,
   isProfilePage: PropTypes.bool,
-  isChangePasswordPage: PropTypes.bool
+  isChangePasswordPage: PropTypes.bool,
+  admin: PropTypes.bool
 }
 
 export default withRouter(Form.create()(connect(mapStateToProps, { signUp })(RegistrationForm)))

@@ -8,15 +8,15 @@ import PropTypes from 'prop-types'
 import BasicModal from './../BasicModal'
 import { connect } from 'react-redux'
 import {
-  addDivision,
-  editDivision
+  addCategory,
+  editCategory
 } from './AdminPanelActions'
 import { hideModal } from './../Actions'
 import { messages } from './../messages'
 
 const { Item: FormItem } = Form
 
-class AddDivisionModal extends Component {
+class AddCategoryModal extends Component {
   constructor (props) {
     super(props)
 
@@ -32,8 +32,8 @@ class AddDivisionModal extends Component {
     e.preventDefault()
     const {
       form,
-      addDivision,
-      editDivision,
+      addCategory,
+      editCategory,
       item = {},
       hideModal
     } = this.props
@@ -41,7 +41,7 @@ class AddDivisionModal extends Component {
     const isEditModal = JSON.stringify(item) !== '{}'
     form.validateFields((err, values) => {
       if (!err) {
-        isEditModal ? editDivision(item.id, values) : addDivision(values)
+        isEditModal ? editCategory(item.id, values) : addCategory(values)
       }
     })
     hideModal()
@@ -82,21 +82,6 @@ class AddDivisionModal extends Component {
               />
             )}
           </FormItem>
-          <FormItem
-            label={messages.admin.address}
-          >
-            {getFieldDecorator('address', {
-              rules: [{
-                required: true,
-                message: messages.admin.fillField
-              }],
-              initialValue: isEditModal ? item.address : ''
-            })(
-              <Input
-                type='text'
-              />
-            )}
-          </FormItem>
           <FormItem>
             <Button
               type='primary'
@@ -113,18 +98,18 @@ class AddDivisionModal extends Component {
   }
 }
 
-AddDivisionModal.propTypes = {
+AddCategoryModal.propTypes = {
   hideModal: PropTypes.func,
   visible: PropTypes.bool,
   getFieldDecorator: PropTypes.func,
   form: PropTypes.object,
   item: PropTypes.object,
-  addDivision: PropTypes.func,
-  editDivision: PropTypes.func
+  addCategory: PropTypes.func,
+  editCategory: PropTypes.func
 }
 
 export default Form.create()(connect(null, {
   hideModal,
-  addDivision,
-  editDivision
-})(AddDivisionModal))
+  addCategory,
+  editCategory
+})(AddCategoryModal))
