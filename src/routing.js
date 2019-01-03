@@ -28,7 +28,7 @@ const {
     itemsStore,
     login,
     profile,
-    announcements,
+    items,
     adminPanel,
     adminPanelItems,
     adminPanelAnnouncements,
@@ -45,7 +45,7 @@ const Routing = () => {
           <App>
             <PrivateRoute
               exact path={app}
-              component={ItemsList}
+              component={AnnouncementsList}
             />
             <Route exact path={login} component={LoginPage} />
             <Route exact path={registration} component={RegistrationPage} />
@@ -53,7 +53,7 @@ const Routing = () => {
             <Route exact path={records} component={Records} />
             <Route exact path={itemsStore} component={ItemsStore} />
             <Route exact path={profile} component={Profile} />
-            <Route exact path={announcements} component={AnnouncementsList} />
+            <Route exact path={items} component={ItemsList} />
             <Route exact path={adminPanelCategories} component={AdminPanelCategories} />
             <Route exact path={adminPanelItems} component={AdminPanelItems} />
             <Route exact path={adminPanelAnnouncements} component={AdminPanelAnnouncements} />

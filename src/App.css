@@ -168,3 +168,13 @@
 .add-button {
   margin-bottom: 30px;
 }
+
+.ant-layout-sider-children {
+  position: relative;
+}
+
+.ant-layout-sider-children .admin-button {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}

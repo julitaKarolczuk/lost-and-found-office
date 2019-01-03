@@ -23,7 +23,7 @@ export const config = {
     records: '/records',
     itemsStore: '/items-store',
     profile: '/profile',
-    announcements: '/announcements',
+    items: '/items',
     adminPanel: '/admin',
     adminPanelCategories: '/admin/categories',
     adminPanelItems: '/admin/items',
