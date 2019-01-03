@@ -13,7 +13,6 @@ const SubMenu = Menu.SubMenu
 
 const {
   app: appUrl,
-  itemsStore,
   records,
   items,
   adminPanel
