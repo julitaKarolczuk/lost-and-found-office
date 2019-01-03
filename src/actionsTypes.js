@@ -15,10 +15,13 @@ export const ADD_ANNOUNCEMENT = 'ADD_ANNOUNCEMENT'
 export const EDIT_ANNOUNCEMENT = 'EDIT_ANNOUNCEMENT'
 
 export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const ADD_CATEGORY = 'ADD_CATEGORY'
 
 export const USER_SIGN_IN = 'USER_SIGN_IN'
 export const USER_SIGN_OUT = 'USER_SIGN_OUT'
 export const GET_USER_DATA = 'GET_USER_DATA'
+export const GET_USERS = 'GET_USERS'
+export const ADD_USER = 'ADD_USER'
 
 export const GET_ITEMS = 'GET_ITEMS'
 export const GET_ITEM_DETAILS = 'GET_ITEM_DETAILS'
@@ -26,3 +29,5 @@ export const ADD_ITEM = 'ADD_ITEM'
 export const EDIT_ITEM = 'EDIT_ITEM'
 
 export const GET_DIVISIONS = 'GET_DIVISIONS'
+export const ADD_DIVISION = 'ADD_DIVISION'
+

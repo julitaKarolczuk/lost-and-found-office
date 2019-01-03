@@ -1,66 +1,55 @@
 import React from 'react'
-import { Card, Icon } from 'antd'
+import { Card } from 'antd'
 import { connect } from 'react-redux'
-import {
-  editAnnouncement
-} from './Actions'
+import { NavLink } from 'react-router-dom'
+import { config } from './config'
+// editAction: this.props.editCategory,
+// addAction: this.props.addCategory,
+// removeAction: this.props.removeCategory
+// editAction: this.props.editAnnouncement,
+// addAction: this.props.addAnnouncement,
+// removeAction: this.props.removeAnnouncement
+// editAction: this.props.editDivision,
+// addAction: this.props.addDivision,
+// removeAction: this.props.removeDivision
+// editAction: this.props.editItem,
+// addAction: this.props.addItem,
+// removeAction: this.props.removeItem
+// editAction: this.props.editUser,
+// addAction: this.props.addUser,
+// removeAction: this.props.removeUser
 
-const AdminPanel = () => {
-  const items = [
-    {
-      title: 'Categories',
-      editdAction: this.props.editCategory,
-      addAction: this.props.addCategory
-    },
-    {
-      title: 'Announcements',
-      editdAction: this.props.editAnnouncement,
-      addAction: this.props.addCategory
-    },
-    {
-      title: 'Categories',
-      editdAction: this.props.editCategory,
-      addAction: this.props.addCategory
-    },
-    {
-      title: 'Categories',
-      editdAction: this.props.editCategory,
-      addAction: this.props.addCategory
-    },
-    {
-      title: 'Categories',
-      editdAction: this.props.editCategory,
-      addAction: this.props.addCategory
-    },
-  ]
-
-  const renderCard = ({ title, editAction, addAction }) => {
+class AdminPanel extends React.Component {
+  get items () {
     return (
-      <Card
-        style={{ width: 300 }}
-        actions={[
-          <Icon
-            type='edit'
-            onClick={editAction}
-          />,
-          <Icon
-            type='plus-circle'
-            onClick={addAction}
-          />
-        ]}
-      >
-        <p>{title}</p>
-      </Card>
+      [
+        'Categories',
+        'Announcements',
+        'Divisions',
+        'Items',
+        'Users'
+      ]
     )
   }
 
-  return (
-    <div>
+  renderItem (item) {
+    return (
+      <Card
+        key={item}
+        title={item}
+        extra={<NavLink to={config.url[`adminPanel${item}`]}>More</NavLink>}
+        bodyStyle={{display: 'none'}}
+      />
+    )
+  }
 
-    </div>
-  )
+  render () {
+    return (
+      <div className='admin-panel'>
+        {this.items.map(this.renderItem)}
+      </div>
+    )
+  }
 }
 
-export default connect(null, {
-  editAnnouncement
-})(AdminPanel)
+export default AdminPanel

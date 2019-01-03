@@ -104,6 +104,10 @@ export const messages = {
     permission: 'Zapoznałem/łam sie z ',
     rules: 'regulaminem',
     register: 'Zarejestruj'
-
+  },
+  admin: {
+    name: 'Nazwa',
+    address: 'Address',
+    fillField: 'Wypełnij pole'
   }
 }

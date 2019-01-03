@@ -93,6 +93,11 @@ export default (state = defaultState, action) => {
         ...state,
         divisions: payload
       }
+    case actions.GET_USERS:
+      return {
+        ...state,
+        users: payload
+      }
     default:
       return state
   }

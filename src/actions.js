@@ -52,7 +52,7 @@ export const openNotificationWithIcon = (type, title, text) => {
 }
 
 // MODAL ACTIONS
-const showModal = ({ modalType, modalProps }) => dispatch => {
+export const showModal = ({ modalType, modalProps }) => dispatch => {
   dispatch({
     type: actionsTypes.SHOW_MODAL,
     modalProps,

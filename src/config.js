@@ -4,11 +4,14 @@ export const config = {
     announcements: '/announcements',
     announcementDetails: '/announcements/{0}',
     categories: '/categories',
+    category: '/categories/{0}',
     authentication: '/users/authenticate',
     registration: '/users/register',
     items: '/items',
     item: '/items/{0}',
     divisions: '/divisions',
+    division: '/divisions/{0}',
+    users: '/users',
     user: '/users/{0}'
   },
   url: {
@@ -21,6 +24,11 @@ export const config = {
     itemsStore: '/items-store',
     profile: '/profile',
     announcements: '/announcements',
-    adminPanel: '/admin-panel'
+    adminPanel: '/admin',
+    adminPanelCategories: '/admin/categories',
+    adminPanelItems: '/admin/items',
+    adminPanelAnnouncements: '/admin/announcements',
+    adminPanelUsers: '/admin/users',
+    adminPanelDivisions: '/admin/divisions'
   }
 }

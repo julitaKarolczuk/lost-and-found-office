@@ -160,3 +160,7 @@
 .ant-layout-sider li.home.ant-menu-item-selected {
   background: none;
 }
+
+.admin-panel .ant-card {
+  margin-bottom: 20px;
+}
