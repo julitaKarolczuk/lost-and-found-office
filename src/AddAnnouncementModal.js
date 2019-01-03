@@ -54,6 +54,7 @@ class AddAnnouncementModal extends Component {
         this.props.addAnnouncement(values)
       }
     })
+    this.props.hideModal()
   }
 
   renderOption ({ id, name }) {
